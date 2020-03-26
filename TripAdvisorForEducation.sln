@@ -3,15 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29728.190
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TripAdvisorForEducation.Web", "TripAdvisorForEducation.Web\TripAdvisorForEducation.Web.csproj", "{99CD82E6-C7F6-4C42-88B3-DF2C9F10AA14}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TripAdvisorForEducation.Web", "TripAdvisorForEducation.Web\TripAdvisorForEducation.Web.csproj", "{99CD82E6-C7F6-4C42-88B3-DF2C9F10AA14}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{26688B76-180B-48AD-9146-828758190144}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TripAdvisorForEducation.Data", "TripAdvisorForEducation.Data\TripAdvisorForEducation.Data.csproj", "{7CAE5D83-786E-48D9-907D-98DF90CF2F57}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TripAdvisorForEducation.Data", "TripAdvisorForEducation.Data\TripAdvisorForEducation.Data.csproj", "{7CAE5D83-786E-48D9-907D-98DF90CF2F57}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TripAdvisorForEducation.Data.Contracts", "TripAdvisorForEducation.Data.Contracts\TripAdvisorForEducation.Data.Contracts.csproj", "{B04F2DB9-80D0-4F05-A767-5F49D5ECC861}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TripAdvisorForEducation.Data.Contracts", "TripAdvisorForEducation.Data.Contracts\TripAdvisorForEducation.Data.Contracts.csproj", "{B04F2DB9-80D0-4F05-A767-5F49D5ECC861}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TripAdvisorForEducation.Data.Models", "TripAdvisorForEducation.Data.Models\TripAdvisorForEducation.Data.Models.csproj", "{8587811B-7B98-4C71-AE78-BB0E403DB954}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TripAdvisorForEducation.Data.Models", "TripAdvisorForEducation.Data.Models\TripAdvisorForEducation.Data.Models.csproj", "{8587811B-7B98-4C71-AE78-BB0E403DB954}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
