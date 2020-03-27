@@ -13,6 +13,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TripAdvisorForEducation.Dat
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TripAdvisorForEducation.Data.Models", "TripAdvisorForEducation.Data.Models\TripAdvisorForEducation.Data.Models.csproj", "{8587811B-7B98-4C71-AE78-BB0E403DB954}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{9DCE8A85-FCED-479A-8A3C-AA24D7927FAD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TripAdvisorForEducation.Services", "TripAdvisorForEducation.Services\TripAdvisorForEducation.Services.csproj", "{62035631-02D0-4C69-BF29-B5588AD9AD47}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,6 +39,10 @@ Global
 		{8587811B-7B98-4C71-AE78-BB0E403DB954}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8587811B-7B98-4C71-AE78-BB0E403DB954}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8587811B-7B98-4C71-AE78-BB0E403DB954}.Release|Any CPU.Build.0 = Release|Any CPU
+		{62035631-02D0-4C69-BF29-B5588AD9AD47}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{62035631-02D0-4C69-BF29-B5588AD9AD47}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{62035631-02D0-4C69-BF29-B5588AD9AD47}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{62035631-02D0-4C69-BF29-B5588AD9AD47}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -43,6 +51,7 @@ Global
 		{7CAE5D83-786E-48D9-907D-98DF90CF2F57} = {26688B76-180B-48AD-9146-828758190144}
 		{B04F2DB9-80D0-4F05-A767-5F49D5ECC861} = {26688B76-180B-48AD-9146-828758190144}
 		{8587811B-7B98-4C71-AE78-BB0E403DB954} = {26688B76-180B-48AD-9146-828758190144}
+		{62035631-02D0-4C69-BF29-B5588AD9AD47} = {9DCE8A85-FCED-479A-8A3C-AA24D7927FAD}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E2484AE5-798F-49A4-B5F5-BA52754CF493}

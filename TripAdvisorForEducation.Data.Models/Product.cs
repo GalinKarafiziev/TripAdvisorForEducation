@@ -21,6 +21,8 @@ namespace TripAdvisorForEducation.Data.Models
         [MaxLength(60)]
         public string Website { get; set; }
 
-        public virtual ICollection<ProductCategory> Categories { get; set; }
+        public ICollection<ProductCategory> Categories { get; set; }
+
+        public ICollection<Review> Reviews { get; set; }
     }
 }

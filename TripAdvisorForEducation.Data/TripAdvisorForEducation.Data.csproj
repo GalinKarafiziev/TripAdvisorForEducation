@@ -13,11 +13,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\TripAdvisorForEducation.Data.Contracts\TripAdvisorForEducation.Data.Contracts.csproj" />
     <ProjectReference Include="..\TripAdvisorForEducation.Data.Models\TripAdvisorForEducation.Data.Models.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Repositories\Contracts\" />
   </ItemGroup>
 
 </Project>
