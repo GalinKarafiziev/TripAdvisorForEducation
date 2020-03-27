@@ -9,6 +9,7 @@ namespace TripAdvisorForEducation.Data.Models
     public class Category
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int CategoryId { get; set; }
 
         [Required]

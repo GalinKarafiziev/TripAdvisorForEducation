@@ -10,8 +10,5 @@ namespace TripAdvisorForEducation.Web.Models
 {
     public class ApplicationUser : IdentityUser
     {
-        [Required]
-        [MaxLength(60)]
-        public string IsType { get; set; }
     }
 }

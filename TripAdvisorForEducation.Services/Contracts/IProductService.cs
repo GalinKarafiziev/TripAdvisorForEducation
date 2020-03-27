@@ -4,7 +4,7 @@ using System.Text;
 
 namespace TripAdvisorForEducation.Services
 {
-    interface IProductService
+    public interface IProductService
     {
     }
 }

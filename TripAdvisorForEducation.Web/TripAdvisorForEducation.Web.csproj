@@ -26,6 +26,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\TripAdvisorForEducation.Data\TripAdvisorForEducation.Data.csproj" />
+    <ProjectReference Include="..\TripAdvisorForEducation.Services\TripAdvisorForEducation.Services.csproj" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

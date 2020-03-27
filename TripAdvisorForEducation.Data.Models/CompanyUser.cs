@@ -9,6 +9,9 @@ namespace TripAdvisorForEducation.Data.Models
 {
     public class CompanyUser : ApplicationUser
     {
+        [MaxLength(60)]
+        public string Name { get; set; }
+
         [MaxLength(1000)]
         public string Description { get; set; }
 

@@ -8,7 +8,8 @@ namespace TripAdvisorForEducation.Data.Models
     public class Product
     {
         [Key]
-        public int ToolId { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int ProductId { get; set; }
 
         public string UserId { get; set; }
 
@@ -20,6 +21,9 @@ namespace TripAdvisorForEducation.Data.Models
 
         [MaxLength(60)]
         public string Website { get; set; }
+
+        [MaxLength(60)]
+        public string Name { get; set; }
 
         public ICollection<ProductCategory> Categories { get; set; }
 

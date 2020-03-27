@@ -6,15 +6,15 @@ namespace TripAdvisorForEducation.Data
 {
     public interface ITripAdvisorforEducationDbContext : IDisposable
     {
-        DbSet<AcademicsUser> AcademicUsers { get; set; }
+        DbSet<AcademicsUser> AcademicUser { get; set; }
 
-        DbSet<CompanyUser> CompanyUsers { get; set; }
+        DbSet<CompanyUser> CompanyUser { get; set; }
 
-        DbSet<Category> Categories { get; set; }
+        DbSet<Category> Category { get; set; }
 
-        DbSet<Product> Products { get; set; }
+        DbSet<Product> Product { get; set; }
 
-        DbSet<Review> Reviews { get; set; }
+        DbSet<Review> Review { get; set; }
 
         DbContext DbContext { get; }
     }

@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TripAdvisorForEducation.Data;
 
 namespace TripAdvisorForEducation.Data.Migrations
 {
     [DbContext(typeof(TripAdvisorForEducationDbContext))]
-    partial class TripAdvisorForEducationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200327145213_UpdatedUsers")]
+    partial class UpdatedUsers
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -348,6 +350,11 @@ namespace TripAdvisorForEducation.Data.Migrations
 
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
+
+                    b.Property<string>("IsType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(60)")
+                        .HasMaxLength(60);
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
