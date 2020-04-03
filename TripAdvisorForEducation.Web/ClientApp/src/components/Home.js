@@ -17,7 +17,7 @@ export class Home extends Component {
     }
 
     getData = async () => {
-        var response = await fetch('company/1');
+        var response = await fetch('products/categories/04c57be8-485a-447d-9c71-41e24dfbba5d');
         var json = await response.json();
 
         console.log(JSON.parse(json))
