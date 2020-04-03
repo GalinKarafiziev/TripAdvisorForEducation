@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using TripAdvisorForEducation.Web.Models;
 
 namespace TripAdvisorForEducation.Data.Models
 {
@@ -9,12 +8,12 @@ namespace TripAdvisorForEducation.Data.Models
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int ProductId { get; set; }
+        public string ProductId { get; set; }
 
         public string UserId { get; set; }
 
         [ForeignKey("UserId")]
-        public ApplicationUser User { get; set; }
+        public CompanyUser User { get; set; }
 
         [MaxLength(1000)]
         public string Description { get; set; }

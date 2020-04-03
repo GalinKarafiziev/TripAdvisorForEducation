@@ -20,7 +20,7 @@ namespace TripAdvisorForEducation.Data.Repositories.Base
 
         public virtual IQueryable<T> All() => this.DbSet.AsQueryable();
 
-        public virtual T GetById(int id) => this.DbSet.Find(id);
+        public virtual T GetById(string id) => this.DbSet.Find(id);
 
         public virtual void Add(T entity)
         {
@@ -53,7 +53,7 @@ namespace TripAdvisorForEducation.Data.Repositories.Base
                 this.DbSet.Remove(entity);
         }
 
-        public virtual void Delete(int id)
+        public virtual void Delete(string id)
         {
             var entity = this.GetById(id);
 

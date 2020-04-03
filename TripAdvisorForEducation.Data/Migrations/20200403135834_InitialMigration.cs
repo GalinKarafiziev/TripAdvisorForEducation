@@ -40,13 +40,16 @@ namespace TripAdvisorForEducation.Data.Migrations
                     LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
                     LockoutEnabled = table.Column<bool>(nullable: false),
                     AccessFailedCount = table.Column<int>(nullable: false),
-                    IsType = table.Column<string>(maxLength: 60, nullable: false),
                     Discriminator = table.Column<string>(nullable: false),
                     FirstName = table.Column<string>(maxLength: 60, nullable: true),
                     LastName = table.Column<string>(maxLength: 60, nullable: true),
                     Role = table.Column<string>(maxLength: 60, nullable: true),
                     Description = table.Column<string>(maxLength: 1000, nullable: true),
-                    Website = table.Column<string>(maxLength: 60, nullable: true)
+                    Website = table.Column<string>(maxLength: 60, nullable: true),
+                    Industry = table.Column<string>(maxLength: 60, nullable: true),
+                    AnnualRevenue = table.Column<string>(maxLength: 60, nullable: true),
+                    CompanySize = table.Column<string>(maxLength: 60, nullable: true),
+                    YearFound = table.Column<string>(maxLength: 60, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -54,16 +57,15 @@ namespace TripAdvisorForEducation.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Categories",
+                name: "Category",
                 columns: table => new
                 {
-                    CategoryId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CategoryId = table.Column<string>(nullable: false),
                     CategoryName = table.Column<string>(maxLength: 60, nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Categories", x => x.CategoryId);
+                    table.PrimaryKey("PK_Category", x => x.CategoryId);
                 });
 
             migrationBuilder.CreateTable(
@@ -207,20 +209,27 @@ namespace TripAdvisorForEducation.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Products",
+                name: "Product",
                 columns: table => new
                 {
-                    ToolId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ProductId = table.Column<string>(nullable: false),
                     UserId = table.Column<string>(nullable: true),
                     Description = table.Column<string>(maxLength: 1000, nullable: true),
-                    Website = table.Column<string>(maxLength: 60, nullable: true)
+                    Website = table.Column<string>(maxLength: 60, nullable: true),
+                    Name = table.Column<string>(maxLength: 60, nullable: true),
+                    CompanyUserId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Products", x => x.ToolId);
+                    table.PrimaryKey("PK_Product", x => x.ProductId);
                     table.ForeignKey(
-                        name: "FK_Products_AspNetUsers_UserId",
+                        name: "FK_Product_AspNetUsers_CompanyUserId",
+                        column: x => x.CompanyUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Product_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
@@ -231,48 +240,47 @@ namespace TripAdvisorForEducation.Data.Migrations
                 name: "ProductCategory",
                 columns: table => new
                 {
-                    ProductId = table.Column<int>(nullable: false),
-                    CategoryId = table.Column<int>(nullable: false)
+                    ProductId = table.Column<string>(nullable: false),
+                    CategoryId = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ProductCategory", x => new { x.CategoryId, x.ProductId });
                     table.ForeignKey(
-                        name: "FK_ProductCategory_Categories_CategoryId",
+                        name: "FK_ProductCategory_Category_CategoryId",
                         column: x => x.CategoryId,
-                        principalTable: "Categories",
+                        principalTable: "Category",
                         principalColumn: "CategoryId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_ProductCategory_Products_ProductId",
+                        name: "FK_ProductCategory_Product_ProductId",
                         column: x => x.ProductId,
-                        principalTable: "Products",
-                        principalColumn: "ToolId",
+                        principalTable: "Product",
+                        principalColumn: "ProductId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Reviews",
+                name: "Review",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<string>(nullable: false),
                     Rating = table.Column<int>(nullable: false),
                     Body = table.Column<string>(maxLength: 1000, nullable: true),
                     UserId = table.Column<string>(nullable: true),
-                    ProductId = table.Column<int>(nullable: false)
+                    ProductId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Reviews", x => x.Id);
+                    table.PrimaryKey("PK_Review", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Reviews_Products_ProductId",
+                        name: "FK_Review_Product_ProductId",
                         column: x => x.ProductId,
-                        principalTable: "Products",
-                        principalColumn: "ToolId",
-                        onDelete: ReferentialAction.Cascade);
+                        principalTable: "Product",
+                        principalColumn: "ProductId",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Reviews_AspNetUsers_UserId",
+                        name: "FK_Review_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
@@ -340,23 +348,28 @@ namespace TripAdvisorForEducation.Data.Migrations
                 columns: new[] { "SubjectId", "ClientId", "Type" });
 
             migrationBuilder.CreateIndex(
+                name: "IX_Product_CompanyUserId",
+                table: "Product",
+                column: "CompanyUserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Product_UserId",
+                table: "Product",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_ProductCategory_ProductId",
                 table: "ProductCategory",
                 column: "ProductId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Products_UserId",
-                table: "Products",
-                column: "UserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Reviews_ProductId",
-                table: "Reviews",
+                name: "IX_Review_ProductId",
+                table: "Review",
                 column: "ProductId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Reviews_UserId",
-                table: "Reviews",
+                name: "IX_Review_UserId",
+                table: "Review",
                 column: "UserId");
         }
 
@@ -387,16 +400,16 @@ namespace TripAdvisorForEducation.Data.Migrations
                 name: "ProductCategory");
 
             migrationBuilder.DropTable(
-                name: "Reviews");
+                name: "Review");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "Categories");
+                name: "Category");
 
             migrationBuilder.DropTable(
-                name: "Products");
+                name: "Product");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");

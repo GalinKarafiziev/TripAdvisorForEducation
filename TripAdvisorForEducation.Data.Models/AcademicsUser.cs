@@ -1,13 +1,10 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
-using TripAdvisorForEducation.Web.Models;
 
 namespace TripAdvisorForEducation.Data.Models
 {
-    public class AcademicsUser : ApplicationUser
+    public class AcademicsUser : IdentityUser
     {
         [MaxLength(60)]
         public string FirstName { get; set; }
@@ -17,5 +14,7 @@ namespace TripAdvisorForEducation.Data.Models
 
         [MaxLength(60)]
         public string Role { get; set; }
+
+        public ICollection<Review> Reviews { get; set; }
     }
 }

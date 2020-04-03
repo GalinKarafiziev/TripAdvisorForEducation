@@ -7,7 +7,7 @@ namespace TripAdvisorForEducation.Data.Contracts
     {
         IQueryable<T> All();
 
-        T GetById(int id);
+        T GetById(string id);
 
         void Add(T entity);
 
@@ -15,6 +15,6 @@ namespace TripAdvisorForEducation.Data.Contracts
 
         void Delete(T entity);
 
-        void Delete(int id);
+        void Delete(string id);
     }
 }

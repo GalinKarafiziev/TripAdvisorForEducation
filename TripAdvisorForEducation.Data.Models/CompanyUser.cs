@@ -1,21 +1,29 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
-using TripAdvisorForEducation.Web.Models;
 
 namespace TripAdvisorForEducation.Data.Models
 {
-    public class CompanyUser : ApplicationUser
+    public class CompanyUser : IdentityUser
     {
-        [MaxLength(60)]
-        public string Name { get; set; }
-
         [MaxLength(1000)]
         public string Description { get; set; }
 
         [MaxLength(60)]
         public string Website { get; set; }
+
+        [MaxLength(60)]
+        public string Industry { get; set; }
+
+        [MaxLength(60)]
+        public string AnnualRevenue { get; set; }
+
+        [MaxLength(60)]
+        public string CompanySize { get; set; }
+
+        [MaxLength(60)]
+        public string YearFound { get; set; }
+
+        public ICollection<Product> Products { get; set; }
     }
 }

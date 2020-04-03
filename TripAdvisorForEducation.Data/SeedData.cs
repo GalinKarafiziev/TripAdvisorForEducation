@@ -61,7 +61,8 @@ namespace TripAdvisorForEducation.Data
                     PhoneNumberConfirmed = false,
                     TwoFactorEnabled = false,
                     LockoutEnabled = false,
-                    AccessFailedCount = 0
+                    AccessFailedCount = 0,
+                    Products = new List<Product>()
                 },
                 new CompanyUser
                 {
@@ -73,7 +74,8 @@ namespace TripAdvisorForEducation.Data
                     PhoneNumberConfirmed = false,
                     TwoFactorEnabled = false,
                     LockoutEnabled = false,
-                    AccessFailedCount = 0
+                    AccessFailedCount = 0,
+                    Products = new List<Product>()
                 },
                 new CompanyUser
                 {
@@ -85,7 +87,8 @@ namespace TripAdvisorForEducation.Data
                     PhoneNumberConfirmed = false,
                     TwoFactorEnabled = false,
                     LockoutEnabled = false,
-                    AccessFailedCount = 0
+                    AccessFailedCount = 0,
+                    Products = new List<Product>()
                 }
             );
 

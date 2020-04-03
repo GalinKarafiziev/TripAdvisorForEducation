@@ -10,8 +10,8 @@ using TripAdvisorForEducation.Data;
 namespace TripAdvisorForEducation.Data.Migrations
 {
     [DbContext(typeof(TripAdvisorForEducationDbContext))]
-    [Migration("20200327105828_UpdatedProducts")]
-    partial class UpdatedProducts
+    [Migration("20200403135834_InitialMigration")]
+    partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -240,10 +240,9 @@ namespace TripAdvisorForEducation.Data.Migrations
 
             modelBuilder.Entity("TripAdvisorForEducation.Data.Models.Category", b =>
                 {
-                    b.Property<int>("CategoryId")
+                    b.Property<string>("CategoryId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("CategoryName")
                         .IsRequired()
@@ -252,19 +251,25 @@ namespace TripAdvisorForEducation.Data.Migrations
 
                     b.HasKey("CategoryId");
 
-                    b.ToTable("Categories");
+                    b.ToTable("Category");
                 });
 
             modelBuilder.Entity("TripAdvisorForEducation.Data.Models.Product", b =>
                 {
-                    b.Property<int>("ToolId")
+                    b.Property<string>("ProductId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("CompanyUserId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(1000)")
                         .HasMaxLength(1000);
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(60)")
+                        .HasMaxLength(60);
 
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
@@ -273,20 +278,22 @@ namespace TripAdvisorForEducation.Data.Migrations
                         .HasColumnType("nvarchar(60)")
                         .HasMaxLength(60);
 
-                    b.HasKey("ToolId");
+                    b.HasKey("ProductId");
+
+                    b.HasIndex("CompanyUserId");
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Products");
+                    b.ToTable("Product");
                 });
 
             modelBuilder.Entity("TripAdvisorForEducation.Data.Models.ProductCategory", b =>
                 {
-                    b.Property<int>("CategoryId")
-                        .HasColumnType("int");
+                    b.Property<string>("CategoryId")
+                        .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
+                    b.Property<string>("ProductId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("CategoryId", "ProductId");
 
@@ -297,17 +304,16 @@ namespace TripAdvisorForEducation.Data.Migrations
 
             modelBuilder.Entity("TripAdvisorForEducation.Data.Models.Review", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<string>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Body")
                         .HasColumnType("nvarchar(1000)")
                         .HasMaxLength(1000);
 
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
+                    b.Property<string>("ProductId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("Rating")
                         .HasColumnType("int");
@@ -321,7 +327,7 @@ namespace TripAdvisorForEducation.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Reviews");
+                    b.ToTable("Review");
                 });
 
             modelBuilder.Entity("TripAdvisorForEducation.Web.Models.ApplicationUser", b =>
@@ -346,11 +352,6 @@ namespace TripAdvisorForEducation.Data.Migrations
 
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
-
-                    b.Property<string>("IsType")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(60)")
-                        .HasMaxLength(60);
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
@@ -423,11 +424,27 @@ namespace TripAdvisorForEducation.Data.Migrations
                 {
                     b.HasBaseType("TripAdvisorForEducation.Web.Models.ApplicationUser");
 
+                    b.Property<string>("AnnualRevenue")
+                        .HasColumnType("nvarchar(60)")
+                        .HasMaxLength(60);
+
+                    b.Property<string>("CompanySize")
+                        .HasColumnType("nvarchar(60)")
+                        .HasMaxLength(60);
+
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(1000)")
                         .HasMaxLength(1000);
 
+                    b.Property<string>("Industry")
+                        .HasColumnType("nvarchar(60)")
+                        .HasMaxLength(60);
+
                     b.Property<string>("Website")
+                        .HasColumnType("nvarchar(60)")
+                        .HasMaxLength(60);
+
+                    b.Property<string>("YearFound")
                         .HasColumnType("nvarchar(60)")
                         .HasMaxLength(60);
 
@@ -487,6 +504,10 @@ namespace TripAdvisorForEducation.Data.Migrations
 
             modelBuilder.Entity("TripAdvisorForEducation.Data.Models.Product", b =>
                 {
+                    b.HasOne("TripAdvisorForEducation.Data.Models.CompanyUser", null)
+                        .WithMany("Products")
+                        .HasForeignKey("CompanyUserId");
+
                     b.HasOne("TripAdvisorForEducation.Web.Models.ApplicationUser", "User")
                         .WithMany()
                         .HasForeignKey("UserId");
@@ -511,9 +532,7 @@ namespace TripAdvisorForEducation.Data.Migrations
                 {
                     b.HasOne("TripAdvisorForEducation.Data.Models.Product", "Product")
                         .WithMany("Reviews")
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ProductId");
 
                     b.HasOne("TripAdvisorForEducation.Web.Models.ApplicationUser", "User")
                         .WithMany()

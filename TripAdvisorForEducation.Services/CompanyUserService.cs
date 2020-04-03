@@ -1,6 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
+using System.Linq;
+using TripAdvisorForEducation.Data.Models;
 using TripAdvisorForEducation.Data.Repositories.Contracts;
 using TripAdvisorForEducation.Services.Contracts;
 
@@ -14,5 +14,10 @@ namespace TripAdvisorForEducation.Services
         {
             this._companyUserRepository = companyUserRepository;
         }
+
+        public CompanyUser GetCompany(string id) => _companyUserRepository.GetById(id);
+
+        public List<Product> GetCompanyProducts(string companyId) 
+            => _companyUserRepository.GetCompanyProducts(companyId).ToList();
     }
 }

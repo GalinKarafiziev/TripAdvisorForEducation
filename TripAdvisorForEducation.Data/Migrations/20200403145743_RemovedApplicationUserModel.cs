@@ -2,7 +2,7 @@
 
 namespace TripAdvisorForEducation.Data.Migrations
 {
-    public partial class UpdatedProducts : Migration
+    public partial class RemovedApplicationUserModel : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

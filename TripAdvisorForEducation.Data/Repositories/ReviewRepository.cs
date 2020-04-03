@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using TripAdvisorForEducation.Data.Models;
+﻿using TripAdvisorForEducation.Data.Models;
 using TripAdvisorForEducation.Data.Repositories.Base;
 using TripAdvisorForEducation.Data.Repositories.Contracts;
 

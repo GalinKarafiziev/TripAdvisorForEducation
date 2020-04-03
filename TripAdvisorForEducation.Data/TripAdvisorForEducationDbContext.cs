@@ -1,14 +1,14 @@
 ﻿using IdentityServer4.EntityFramework.Options;
 using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using TripAdvisorForEducation.Data.Configurations;
 using TripAdvisorForEducation.Data.Models;
-using TripAdvisorForEducation.Web.Models;
 
 namespace TripAdvisorForEducation.Data
 {
-    public class TripAdvisorForEducationDbContext : ApiAuthorizationDbContext<ApplicationUser>, ITripAdvisorforEducationDbContext
+    public class TripAdvisorForEducationDbContext : ApiAuthorizationDbContext<IdentityUser>, ITripAdvisorforEducationDbContext
     {
         public TripAdvisorForEducationDbContext(
             DbContextOptions options,

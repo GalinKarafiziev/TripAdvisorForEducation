@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Linq;
 using TripAdvisorForEducation.Data.Models;
 using TripAdvisorForEducation.Data.Repositories.Base;
 using TripAdvisorForEducation.Data.Repositories.Contracts;
+using TripAdvisorForEducation.Data.Repositories.Extensions;
 
 namespace TripAdvisorForEducation.Data.Repositories
 {
@@ -15,6 +13,31 @@ namespace TripAdvisorForEducation.Data.Repositories
         {
         }
 
-        public IQueryable<Review> GetProductReviews(int productId) => GetById(productId).Reviews.AsQueryable();
+        public IQueryable<ProductCategory> GetProductCategories(string productId) => 
+            GetById(productId).GetCategories(Context).Categories.AsQueryable();
+
+        public CompanyUser GetProductCompany(string productId)
+        {
+            var product = GetById(productId);
+
+            Context
+                .Entry(product)
+                .Reference(x => x.User)
+                .Load();
+
+            return product.User;
+        }
+
+        public IQueryable<Review> GetProductReviews(string productId)
+        {
+            var product = GetById(productId);
+
+            Context
+                .Entry(product)
+                .Collection(x => x.Reviews)
+                .Load();
+
+            return product.Reviews.AsQueryable();
+        }
     }
 }

@@ -1,5 +1,5 @@
-﻿using System;
-using TripAdvisorForEducation.Data.Contracts;
+﻿using System.Collections.Generic;
+using System.Linq;
 using TripAdvisorForEducation.Data.Models;
 using TripAdvisorForEducation.Data.Repositories.Contracts;
 
@@ -13,5 +13,24 @@ namespace TripAdvisorForEducation.Services
         {
             this._productRepository = productRepository;
         }
+
+        public Product GetProduct(string productId) => _productRepository.GetById(productId);
+
+        public List<Product> GetProducts() => _productRepository.All().ToList();
+
+        public List<Review> GetProductReviews(string productId) 
+        { 
+            var result = _productRepository.GetProductReviews(productId).ToList();
+
+            if (result == null)
+                return new List<Review>();
+
+            return result;
+        }
+
+        public CompanyUser GetProductCompany(string productId) => _productRepository.GetProductCompany(productId);
+
+        public List<ProductCategory> GetProductCategories(string productId) 
+            => _productRepository.GetProductCategories(productId).ToList();
     }
 }

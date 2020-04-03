@@ -3,12 +3,12 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.EntityFrameworkCore;
-using TripAdvisorForEducation.Web.Models;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using TripAdvisorForEducation.Data;
 using TripAdvisorForEducation.Services;
+using Microsoft.AspNetCore.Identity;
 
 namespace TripAdvisorForEducation.Web
 {
@@ -25,13 +25,13 @@ namespace TripAdvisorForEducation.Web
         {
             services.AddDbContext<TripAdvisorForEducationDbContext>(options =>
                 options.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection")));
+                    Configuration.GetConnectionString("DefaultConnection"))) ;
 
-            services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
+            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<TripAdvisorForEducationDbContext>();
 
             services.AddIdentityServer()
-                .AddApiAuthorization<ApplicationUser, TripAdvisorForEducationDbContext>();
+                .AddApiAuthorization<IdentityUser, TripAdvisorForEducationDbContext>();
 
             services.AddAuthentication()
                 .AddIdentityServerJwt();
@@ -52,7 +52,7 @@ namespace TripAdvisorForEducation.Web
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            UpdateDatabase(app);
+            //UpdateDatabase(app);
 
             if (env.IsDevelopment())
             {
@@ -96,10 +96,7 @@ namespace TripAdvisorForEducation.Web
 
         private static void UpdateDatabase(IApplicationBuilder app)
         {
-            using var serviceScope = app.ApplicationServices
-                .GetRequiredService<IServiceScopeFactory>()
-                .CreateScope();
-
+            using var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope();
             using var context = serviceScope.ServiceProvider.GetService<TripAdvisorForEducationDbContext>();
             context.Database.Migrate();
         }
