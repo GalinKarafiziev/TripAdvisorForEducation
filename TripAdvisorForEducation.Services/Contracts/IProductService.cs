@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using TripAdvisorForEducation.Data.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace TripAdvisorForEducation.Services
 {
@@ -13,6 +14,8 @@ namespace TripAdvisorForEducation.Services
 
         CompanyUser GetProductCompany(string productId);
 
-        List<ProductCategory> GetProductCategories(string productId);
+        List<Category> GetProductCategories(string productId);
+
+        Product AddProduct(string description, string website, string name, string categoryId, string userId);
     }
 }

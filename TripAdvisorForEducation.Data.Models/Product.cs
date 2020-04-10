@@ -6,6 +6,12 @@ namespace TripAdvisorForEducation.Data.Models
 {
     public class Product
     {
+        public Product()
+        {
+            Categories = new List<ProductCategory>();
+            Reviews = new List<Review>();
+        }
+
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public string ProductId { get; set; }

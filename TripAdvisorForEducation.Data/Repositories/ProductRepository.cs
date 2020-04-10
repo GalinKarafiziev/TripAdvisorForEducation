@@ -9,18 +9,21 @@ namespace TripAdvisorForEducation.Data.Repositories
 {
     public class ProductRepository : GenericRepository<Product>, IProductRepository
     {
-        public ProductRepository(TripAdvisorForEducationDbContext context) 
+        public ProductRepository(TripAdvisorForEducationDbContext context)
             : base(context)
         {
         }
 
-        public IQueryable<ProductCategory> GetProductCategories(string productId) =>
-            GetById(productId).LoadEntityCollection(Context, x => x.Categories).Categories.AsQueryable();
+        public IQueryable<Category> GetProductCategories(string productId) =>
+            GetById(productId)
+                .LoadEntityCollection(Context, x => x.Categories).Categories
+                .Select(x => x.LoadEntityReference(Context, x => x.Category).Category)
+                .AsQueryable();
 
-        public CompanyUser GetProductCompany(string productId) => 
+        public CompanyUser GetProductCompany(string productId) =>
             GetById(productId).LoadEntityReference(Context, x => x.User).User;
 
-        public IQueryable<Review> GetProductReviews(string productId) => 
+        public IQueryable<Review> GetProductReviews(string productId) =>
             GetById(productId).LoadEntityCollection(Context, x => x.Reviews).Reviews.AsQueryable();
     }
 }

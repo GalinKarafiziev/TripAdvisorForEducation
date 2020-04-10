@@ -9,6 +9,8 @@ using Microsoft.Extensions.Hosting;
 using TripAdvisorForEducation.Data;
 using TripAdvisorForEducation.Services;
 using Microsoft.AspNetCore.Identity;
+using Newtonsoft.Json.Serialization;
+using Newtonsoft.Json;
 
 namespace TripAdvisorForEducation.Web
 {
@@ -39,8 +41,13 @@ namespace TripAdvisorForEducation.Web
             services.RegisterRepositories();
             services.RegisterServices();
 
-            services.AddControllersWithViews();
-            services.AddRazorPages();
+            services.AddControllers()
+                .AddNewtonsoftJson(options => 
+                {
+                    options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+                    options.SerializerSettings.Formatting = Formatting.Indented;
+                    options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+                });
 
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration =>

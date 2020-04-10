@@ -2,6 +2,7 @@
 using TripAdvisorForEducation.Data.Models;
 using TripAdvisorForEducation.Data.Repositories.Base;
 using TripAdvisorForEducation.Data.Repositories.Contracts;
+using TripAdvisorForEducation.Data.Repositories.Extensions;
 
 namespace TripAdvisorForEducation.Data.Repositories
 {
@@ -12,16 +13,7 @@ namespace TripAdvisorForEducation.Data.Repositories
         {
         }
 
-        public IQueryable<Product> GetCompanyProducts(string companyId)
-        {
-            var company = GetById(companyId);
-
-            Context
-                .Entry(company)
-                .Collection(x => x.Products)
-                .Load();
-
-            return company.Products.AsQueryable();
-        }
+        public IQueryable<Product> GetCompanyProducts(string companyId) => 
+            GetById(companyId).LoadEntityCollection(Context, x => x.Products).Products.AsQueryable();
     }
 }

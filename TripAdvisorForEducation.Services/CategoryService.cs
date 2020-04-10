@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using TripAdvisorForEducation.Data.Models;
 using TripAdvisorForEducation.Data.Repositories.Contracts;
 
@@ -13,7 +11,7 @@ namespace TripAdvisorForEducation.Services
 
         public CategoryService(ICategoryRepository categoryRepository)
         {
-            this._categoryRepository = categoryRepository;
+            _categoryRepository = categoryRepository;
         }
 
         public List<Category> GetCategories() => _categoryRepository.All().ToList();

@@ -6,11 +6,17 @@ namespace TripAdvisorForEducation.Data.Models
 {
     public class CompanyUser : IdentityUser
     {
+        public CompanyUser()
+        {
+            Products = new List<Product>();
+        }
+
         [MaxLength(1000)]
         public string Description { get; set; }
 
         [MaxLength(60)]
         public string Website { get; set; }
+
 
         [MaxLength(60)]
         public string Industry { get; set; }

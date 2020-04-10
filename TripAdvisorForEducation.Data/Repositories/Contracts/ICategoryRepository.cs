@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using TripAdvisorForEducation.Data.Contracts;
+﻿using System.Linq;
 using TripAdvisorForEducation.Data.Models;
 
 namespace TripAdvisorForEducation.Data.Repositories.Contracts

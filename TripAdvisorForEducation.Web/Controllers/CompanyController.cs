@@ -6,18 +6,17 @@ namespace TripAdvisorForEducation.Web.Controllers
     [Route("company")]
     public class CompanyController : Controller
     {
-        private readonly ICompanyUserService companyUserService;
+        private readonly ICompanyUserService _companyUserService;
 
         public CompanyController(ICompanyUserService companyUserService) 
         {
-            this.companyUserService = companyUserService;
+            _companyUserService = companyUserService;
         }
 
         [HttpGet("{companyId}")]
-        public JsonResult GetCompany([FromRoute]string companyId) => companyUserService.GetCompany(companyId).ToJsonResult();
+        public IActionResult GetCompany([FromRoute]string companyId) => Json(_companyUserService.GetCompany(companyId));
 
         [HttpGet("products/{companyId}")]
-        public JsonResult GetCompanyProducts([FromRoute]string companyId) => 
-            companyUserService.GetCompanyProducts(companyId).ToJsonResult();
+        public IActionResult GetCompanyProducts([FromRoute]string companyId) => Json(_companyUserService.GetCompanyProducts(companyId));
     }
 }

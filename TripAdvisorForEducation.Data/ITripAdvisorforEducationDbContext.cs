@@ -16,6 +16,8 @@ namespace TripAdvisorForEducation.Data
 
         DbSet<Review> Review { get; set; }
 
+        DbSet<ProductCategory> ProductsCategories { get; set; }
+
         DbContext DbContext { get; }
     }
 }

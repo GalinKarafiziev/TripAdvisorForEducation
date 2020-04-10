@@ -6,18 +6,17 @@ namespace TripAdvisorForEducation.Web.Controllers
     [Route("categories")]
     public class CategoryController : Controller
     {
-        private readonly ICategoryService categoryService;
+        private readonly ICategoryService _categoryService;
 
         public CategoryController(ICategoryService categoryService)
         {
-            this.categoryService = categoryService;
+            _categoryService = categoryService;
         }
 
-        [HttpGet("/")]
-        public JsonResult GetCategories() => categoryService.GetCategories().ToJsonResult();
-
         [HttpGet]
-        public JsonResult GetCategoryProducts(string categoryId) 
-            => categoryService.GetCategoryProducts(categoryId).ToJsonResult();
+        public IActionResult GetCategories() => Json(_categoryService.GetCategories());
+
+        [HttpGet("products/{categoryId}")]
+        public IActionResult GetCategoryProducts([FromRoute]string categoryId) => Json(_categoryService.GetCategoryProducts(categoryId));
     }
 }

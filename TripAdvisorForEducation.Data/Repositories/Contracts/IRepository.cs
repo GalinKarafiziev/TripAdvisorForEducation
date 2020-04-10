@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 
-namespace TripAdvisorForEducation.Data.Contracts
+namespace TripAdvisorForEducation.Data.Repositories.Contracts
 {
     public interface IRepository<T>
         where T : class

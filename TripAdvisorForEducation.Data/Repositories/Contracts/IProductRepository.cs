@@ -1,5 +1,4 @@
 ﻿using System.Linq;
-using TripAdvisorForEducation.Data.Contracts;
 using TripAdvisorForEducation.Data.Models;
 
 namespace TripAdvisorForEducation.Data.Repositories.Contracts
@@ -8,7 +7,7 @@ namespace TripAdvisorForEducation.Data.Repositories.Contracts
     {
         IQueryable<Review> GetProductReviews(string productId);
 
-        IQueryable<ProductCategory> GetProductCategories(string productId);
+        IQueryable<Category> GetProductCategories(string productId);
 
         CompanyUser GetProductCompany(string productId);
     }

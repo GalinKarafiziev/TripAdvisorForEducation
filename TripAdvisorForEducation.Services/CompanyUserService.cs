@@ -12,7 +12,7 @@ namespace TripAdvisorForEducation.Services
 
         public CompanyUserService(ICompanyUserRepository companyUserRepository)
         {
-            this._companyUserRepository = companyUserRepository;
+            _companyUserRepository = companyUserRepository;
         }
 
         public CompanyUser GetCompany(string id) => _companyUserRepository.GetById(id);
