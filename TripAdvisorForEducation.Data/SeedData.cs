@@ -15,6 +15,7 @@ namespace TripAdvisorForEducation.Data
 
             SeedCompanyUsers(context);
             SeedProducts(context);
+            SeedCategories(context);
         }
 
         private static void SeedProducts(TripAdvisorForEducationDbContext context)
@@ -61,8 +62,7 @@ namespace TripAdvisorForEducation.Data
                     PhoneNumberConfirmed = false,
                     TwoFactorEnabled = false,
                     LockoutEnabled = false,
-                    AccessFailedCount = 0,
-                    Products = new List<Product>()
+                    AccessFailedCount = 0
                 },
                 new CompanyUser
                 {
@@ -74,8 +74,7 @@ namespace TripAdvisorForEducation.Data
                     PhoneNumberConfirmed = false,
                     TwoFactorEnabled = false,
                     LockoutEnabled = false,
-                    AccessFailedCount = 0,
-                    Products = new List<Product>()
+                    AccessFailedCount = 0
                 },
                 new CompanyUser
                 {
@@ -87,8 +86,70 @@ namespace TripAdvisorForEducation.Data
                     PhoneNumberConfirmed = false,
                     TwoFactorEnabled = false,
                     LockoutEnabled = false,
-                    AccessFailedCount = 0,
-                    Products = new List<Product>()
+                    AccessFailedCount = 0
+                }
+            );
+
+            context.SaveChanges();
+        }
+
+        private static void SeedCategories(TripAdvisorForEducationDbContext context)
+        {
+            if (context.Category.Any())
+                return;
+
+            context.Category.AddRange(
+                new Category
+                {
+                    CategoryName = "Assistance"
+                },
+                new Category
+                {
+                    CategoryName = "Feedback tools"
+                },
+                new Category
+                {
+                    CategoryName = "Communication"
+                },
+                new Category
+                {
+                    CategoryName = "Task Management"
+                },
+                new Category
+                {
+                    CategoryName = "Schedule"
+                },
+                new Category
+                {
+                    CategoryName = "Presentation"
+                },
+                new Category
+                {
+                    CategoryName = "Peer Feedback"
+                },
+                new Category
+                {
+                    CategoryName = "Documentation"
+                },
+                new Category
+                {
+                    CategoryName = "Interactive video"
+                },
+                new Category
+                {
+                    CategoryName = "Grading"
+                },
+                new Category
+                {
+                    CategoryName = "Peer Reviews"
+                },
+                new Category
+                {
+                    CategoryName = "Plan Management"
+                },
+                new Category
+                {
+                    CategoryName = "Learning Management System"
                 }
             );
 

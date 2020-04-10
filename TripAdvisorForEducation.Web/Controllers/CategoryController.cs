@@ -3,6 +3,7 @@ using TripAdvisorForEducation.Services;
 
 namespace TripAdvisorForEducation.Web.Controllers
 {
+    [Route("categories")]
     public class CategoryController : Controller
     {
         private readonly ICategoryService categoryService;
@@ -12,7 +13,7 @@ namespace TripAdvisorForEducation.Web.Controllers
             this.categoryService = categoryService;
         }
 
-        [HttpGet]
+        [HttpGet("/")]
         public JsonResult GetCategories() => categoryService.GetCategories().ToJsonResult();
 
         [HttpGet]
