@@ -20,10 +20,5 @@ namespace TripAdvisorForEducation.Data.Models
         public string CategoryName { get; set; }
 
         public ICollection<ProductCategory> Products { get; set; }
-
-        public Category()
-        {
-            this.Products = new List<ProductCategory>();
-        }
     }
 }
