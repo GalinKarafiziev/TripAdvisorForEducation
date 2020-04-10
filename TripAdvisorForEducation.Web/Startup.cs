@@ -11,6 +11,7 @@ using TripAdvisorForEducation.Services;
 using Microsoft.AspNetCore.Identity;
 using Newtonsoft.Json.Serialization;
 using Newtonsoft.Json;
+using AutoMapper;
 
 namespace TripAdvisorForEducation.Web
 {
@@ -40,6 +41,8 @@ namespace TripAdvisorForEducation.Web
 
             services.RegisterRepositories();
             services.RegisterServices();
+
+            services.AddAutoMapper(typeof(Startup));
 
             services.AddControllers()
                 .AddNewtonsoftJson(options => 

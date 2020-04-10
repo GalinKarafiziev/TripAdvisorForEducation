@@ -1,18 +1,23 @@
-﻿using System.Collections.Generic;
+﻿using AutoMapper;
+using CuttingEdge.Conditions;
+using System;
+using System.Collections.Generic;
 using System.Linq;
-using TripAdvisorForEducation.Data;
 using TripAdvisorForEducation.Data.Models;
 using TripAdvisorForEducation.Data.Repositories.Contracts;
+using TripAdvisorForEducation.Data.ViewModels;
 
 namespace TripAdvisorForEducation.Services
 {
     public class ProductService : IProductService
     {
         private readonly IProductRepository _productRepository;
+        private readonly IMapper _mapper;
 
-        public ProductService(IProductRepository productRepository)
+        public ProductService(IProductRepository productRepository, IMapper mapper)
         {
             _productRepository = productRepository;
+            _mapper = mapper;
         }
 
         public Product GetProduct(string productId) => _productRepository.GetById(productId);
@@ -35,26 +40,55 @@ namespace TripAdvisorForEducation.Services
         public List<Category> GetProductCategories(string productId) => 
             _productRepository.GetProductCategories(productId).ToList();
 
-        public Product AddProduct(string description, string website, string name, string categoryId, string userId)
+        public (bool success, string productId) AddProduct(ProductViewModel productViewModel)
         {
-            var product = new Product
+            try
             {
-                Description = description,
-                Website = website,
-                Name = name,
-                UserId = userId
-            };
+                Condition.Requires(productViewModel.Name, nameof(productViewModel.Name)).IsNotNullOrEmpty();
+                Condition.Requires(productViewModel.Description, nameof(productViewModel.Description)).IsNotNullOrEmpty();
+                Condition.Requires(productViewModel.UserId, nameof(productViewModel.UserId)).IsNotNullOrEmpty();
+                Condition.Requires(productViewModel.CategoryIds, nameof(productViewModel.CategoryIds)).IsNotEmpty();
 
-            _productRepository.Add(product);
-            product.Categories.Add(new ProductCategory
+                var product = _mapper.Map<Product>(productViewModel);
+                _productRepository.Add(product);
+
+                foreach (var categoryId in productViewModel.CategoryIds)
+                {
+                    if (product.Categories.Any(x => x.CategoryId == categoryId))
+                        continue;
+
+                    product.Categories.Add(new ProductCategory
+                    {
+                        ProductId = product.ProductId,
+                        CategoryId = categoryId
+                    });
+                }
+
+                _productRepository.SaveChanges();
+
+                return (true, product.ProductId);
+            }
+            catch (Exception ex)
             {
-                ProductId = product.ProductId,
-                CategoryId = categoryId
-            });
+                return (false, null);
+            }
+        }
 
-            _productRepository.SaveChanges();
+        public bool DeleteProduct(string productId)
+        {
+            try
+            {
+                Condition.Requires(productId, nameof(productId)).IsNotNullOrEmpty();
+                
+                _productRepository.Delete(productId);
+                _productRepository.SaveChanges();
 
-            return product;
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
         }
     }
 }
