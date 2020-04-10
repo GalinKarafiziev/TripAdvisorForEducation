@@ -14,6 +14,8 @@ namespace TripAdvisorForEducation.Data.Repositories
         {
         }
 
+       
+
         public IQueryable<ProductCategory> GetProductCategories(string productId) =>
             GetById(productId).LoadEntityCollection(Context, x => x.Categories).Categories.AsQueryable();
 

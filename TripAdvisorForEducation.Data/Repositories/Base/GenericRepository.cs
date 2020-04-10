@@ -28,8 +28,13 @@ namespace TripAdvisorForEducation.Data.Repositories.Base
 
             if (entry.State != EntityState.Detached)
                 entry.State = EntityState.Added;
+
             else
+            {
                 this.DbSet.Add(entity);
+                this.Context.SaveChanges();
+            }
+                
         }
 
         public virtual void Update(T entity)

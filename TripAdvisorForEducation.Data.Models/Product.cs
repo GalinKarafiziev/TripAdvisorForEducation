@@ -27,5 +27,10 @@ namespace TripAdvisorForEducation.Data.Models
         public ICollection<ProductCategory> Categories { get; set; }
 
         public ICollection<Review> Reviews { get; set; }
+
+        public Product()
+        {
+            this.Categories = new List<ProductCategory>();
+        }
     }
 }

@@ -26,5 +26,10 @@ namespace TripAdvisorForEducation.Data.Models
         public string YearFound { get; set; }
 
         public ICollection<Product> Products { get; set; }
+
+        public CompanyUser()
+        {
+            Products = new List<Product>();
+        }
     }
 }

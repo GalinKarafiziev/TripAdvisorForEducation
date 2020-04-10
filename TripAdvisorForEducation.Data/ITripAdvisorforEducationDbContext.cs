@@ -13,6 +13,7 @@ namespace TripAdvisorForEducation.Data
         DbSet<Category> Category { get; set; }
 
         DbSet<Product> Product { get; set; }
+        DbSet<ProductCategory> ProductCategory { get; set; }
 
         DbSet<Review> Review { get; set; }
 
