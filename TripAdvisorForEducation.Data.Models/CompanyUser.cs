@@ -12,6 +12,7 @@ namespace TripAdvisorForEducation.Data.Models
         [MaxLength(60)]
         public string Website { get; set; }
 
+
         [MaxLength(60)]
         public string Industry { get; set; }
 

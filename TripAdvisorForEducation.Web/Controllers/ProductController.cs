@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using TripAdvisorForEducation.Data.Models;
 using TripAdvisorForEducation.Services;
 
 namespace TripAdvisorForEducation.Web.Controllers
@@ -11,6 +12,7 @@ namespace TripAdvisorForEducation.Web.Controllers
         public ProductController(IProductService productService)
         {
             this.productService = productService;
+            
         }
 
         [HttpGet("{productId}")]
@@ -27,5 +29,10 @@ namespace TripAdvisorForEducation.Web.Controllers
 
         [HttpGet("categories/{productId}")]
         public JsonResult GetProductCategories(string productId) => productService.GetProductCategories(productId).ToJsonResult();
+
+        [HttpPost]
+        public JsonResult AddProduct(string description, string website, string name, string category, string user) => productService.AddProduct(description, website, name, category, user).ToJsonResult();
+
+      
     }
 }

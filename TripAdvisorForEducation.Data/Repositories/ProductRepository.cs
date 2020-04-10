@@ -22,5 +22,7 @@ namespace TripAdvisorForEducation.Data.Repositories
 
         public IQueryable<Review> GetProductReviews(string productId) => 
             GetById(productId).LoadEntityCollection(Context, x => x.Reviews).Reviews.AsQueryable();
+
+
     }
 }
