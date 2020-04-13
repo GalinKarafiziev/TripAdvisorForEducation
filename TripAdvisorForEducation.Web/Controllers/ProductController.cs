@@ -28,7 +28,7 @@ namespace TripAdvisorForEducation.Web.Controllers
         [HttpGet("categories/{productId}")]
         public IActionResult GetProductCategories([FromRoute]string productId) => Json(_productService.GetProductCategories(productId));
 
-        [HttpPost("new")]
+        [HttpPost]
         public IActionResult AddProduct([FromBody]ProductViewModel productViewModel) => 
             Json(_productService.AddProduct(productViewModel.Description,
                 productViewModel.Website,

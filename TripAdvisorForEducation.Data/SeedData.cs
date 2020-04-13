@@ -16,6 +16,7 @@ namespace TripAdvisorForEducation.Data
             SeedCompanyUsers(context);
             SeedProducts(context);
             SeedCategories(context);
+            SeedAcademicUsers(context);
         }
 
         private static void SeedProducts(TripAdvisorForEducationDbContext context)
@@ -92,6 +93,47 @@ namespace TripAdvisorForEducation.Data
 
             context.SaveChanges();
         }
+
+
+        private static void SeedAcademicUsers(TripAdvisorForEducationDbContext context)
+        {
+            if (context.AcademicUser.Any())
+            {
+                return;
+            }
+
+            context.AcademicUser.AddRange(
+                new AcademicsUser
+                {
+                    FirstName = "Gali",
+                    LastName = "Kara",
+                    Role = "Teacher",
+                    EmailConfirmed = false,
+                    PhoneNumberConfirmed = false,
+                    TwoFactorEnabled = false,
+                    LockoutEnabled = false,
+                    AccessFailedCount = 0
+
+                }
+                );
+
+            context.AcademicUser.AddRange(
+                new AcademicsUser
+                {
+                    FirstName = "Mock",
+                    LastName = "Mock",
+                    Role = "Student",
+                    EmailConfirmed = false,
+                    PhoneNumberConfirmed = false,
+                    TwoFactorEnabled = false,
+                    LockoutEnabled = false,
+                    AccessFailedCount = 0
+                }
+            );
+
+            context.SaveChanges();
+        }
+
 
         private static void SeedCategories(TripAdvisorForEducationDbContext context)
         {

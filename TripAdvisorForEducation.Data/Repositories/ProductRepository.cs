@@ -8,9 +8,11 @@ namespace TripAdvisorForEducation.Data.Repositories
 {
     public class ProductRepository : GenericRepository<Product>, IProductRepository
     {
+        
         public ProductRepository(TripAdvisorForEducationDbContext context)
             : base(context)
         {
+            
         }
 
         public IQueryable<Category> GetProductCategories(string productId) =>
@@ -22,7 +24,16 @@ namespace TripAdvisorForEducation.Data.Repositories
         public CompanyUser GetProductCompany(string productId) =>
             GetById(productId).LoadEntityReference(Context, x => x.User).User;
 
-        public IQueryable<Review> GetProductReviews(string productId) =>
-            GetById(productId).LoadEntityCollection(Context, x => x.Reviews).Reviews.AsQueryable();
+        public IQueryable<Review> GetProductReviews(string productId)
+        {
+            Product product = Context.Product.Find(productId);
+            if(product != null)
+            {
+                return product.LoadEntityCollection(Context, x => x.Reviews).Reviews.AsQueryable();
+            }
+
+            return null;
+        }
+           
     }
 }

@@ -20,7 +20,7 @@ export class Home extends Component {
         var response = await fetch('categories/');
         var json = await response.json();
 
-        console.log(JSON.parse(json))
+        //console.log(JSON.parse(json))
 
         return {}
     }

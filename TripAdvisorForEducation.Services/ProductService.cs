@@ -13,6 +13,7 @@ namespace TripAdvisorForEducation.Services
         public ProductService(IProductRepository productRepository)
         {
             _productRepository = productRepository;
+            
         }
 
         public Product GetProduct(string productId) => _productRepository.GetById(productId);
@@ -52,6 +53,7 @@ namespace TripAdvisorForEducation.Services
                 CategoryId = categoryId
             });
 
+            
             _productRepository.SaveChanges();
 
             return product;

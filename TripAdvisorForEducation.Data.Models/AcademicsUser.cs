@@ -16,5 +16,10 @@ namespace TripAdvisorForEducation.Data.Models
         public string Role { get; set; }
 
         public ICollection<Review> Reviews { get; set; }
+
+        public AcademicsUser()
+        {
+            Reviews = new List<Review>();
+        }
     }
 }
