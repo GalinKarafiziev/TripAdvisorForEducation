@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -12,10 +12,39 @@ namespace TripAdvisorForEducation.Data
         public static void Initialize(IServiceProvider serviceProvider)
         {
             var context = serviceProvider.GetService<TripAdvisorForEducationDbContext>();
+            var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+            var userManager = serviceProvider.GetRequiredService<UserManager<IdentityUser>>();
 
-            SeedCompanyUsers(context);
-            SeedProducts(context);
-            SeedCategories(context);
+            SeedRoles(roleManager);
+            SeedAdminUser(userManager);
+            //SeedCompanyUsers(context);
+            //SeedProducts(context);
+            //SeedCategories(context);
+        }
+
+        private static void SeedAdminUser(UserManager<IdentityUser> userManager)
+        {
+            userManager.CreateAsync(new AcademicsUser()
+            {
+                Email = "testAdmin@test.com",
+                UserName = "patence",
+                EmailConfirmed = false,
+                PhoneNumberConfirmed = false,
+                TwoFactorEnabled = false,
+                LockoutEnabled = false,
+                AccessFailedCount = 0
+
+            }, "Testadminuser123$").GetAwaiter().GetResult();
+
+            var user = userManager.FindByEmailAsync("testAdmin@test.com").GetAwaiter().GetResult();
+            userManager.AddToRoleAsync(user, UserRoles.Admin.ToString()).GetAwaiter().GetResult();
+        }
+
+        private static void SeedRoles(RoleManager<IdentityRole> roleManager)
+        {
+            foreach (var roleName in Enum.GetNames(typeof(UserRoles)))
+                if (!roleManager.RoleExistsAsync(roleName).GetAwaiter().GetResult())
+                    roleManager.CreateAsync(new IdentityRole { Name = roleName }).GetAwaiter().GetResult();
         }
 
         private static void SeedProducts(TripAdvisorForEducationDbContext context)
