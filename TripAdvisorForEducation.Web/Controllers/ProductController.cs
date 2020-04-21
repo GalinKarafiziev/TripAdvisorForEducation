@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using TripAdvisorForEducation.Data.ViewModels;
 using TripAdvisorForEducation.Services;
 
 namespace TripAdvisorForEducation.Web.Controllers
@@ -29,24 +31,17 @@ namespace TripAdvisorForEducation.Web.Controllers
         public IActionResult GetProductCategories([FromRoute]string productId) => Json(_productService.GetProductCategories(productId));
 
         [HttpPost("new")]
-        public IActionResult AddProduct([FromBody]ProductViewModel productViewModel) => 
-            Json(_productService.AddProduct(productViewModel.Description,
-                productViewModel.Website,
-                productViewModel.Name,
-                productViewModel.CategoryId,
-                productViewModel.UserId));
-
-        public class ProductViewModel
+        public IActionResult AddProduct([FromBody]ProductViewModel productViewModel)
         {
-            public string Description { get; set; }
+            var (success, productId) = _productService.AddProduct(productViewModel);
+            return success ? Ok(new { productID = productId }) : (IActionResult)BadRequest();
+        }
 
-            public string Website { get; set; }
-
-            public string Name { get; set; }
-
-            public string CategoryId { get; set; }
-
-            public string UserId { get; set; }
+        [HttpDelete("{productId}")]
+        public IActionResult DeleteProduct(string productId)
+        {
+            var success = _productService.DeleteProduct(productId);
+            return success ? Ok() : (IActionResult)BadRequest();
         }
     }
 }

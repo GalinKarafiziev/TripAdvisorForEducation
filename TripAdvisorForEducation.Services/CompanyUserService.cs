@@ -15,6 +15,8 @@ namespace TripAdvisorForEducation.Services
             _companyUserRepository = companyUserRepository;
         }
 
+        public List<CompanyUser> GetCompanyUsers() => _companyUserRepository.All().ToList();
+
         public CompanyUser GetCompany(string id) => _companyUserRepository.GetById(id);
 
         public List<Product> GetCompanyProducts(string companyId) 

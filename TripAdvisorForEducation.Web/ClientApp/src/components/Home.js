@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import authService from './api-authorization/AuthorizeService'
 
 export class Home extends Component {
     constructor(props) {
@@ -16,19 +17,18 @@ export class Home extends Component {
         }
     }
 
-    getData = async () => {
-        var response = await fetch('categories/');
+    async getData() {
+        const token = await authService.getAccessToken();
+        var response = await fetch('admin', {
+            headers: !token ? {} : { 'Authorization': `Bearer ${token}` }
+        });
+
         var json = await response.json();
-
-        console.log(JSON.parse(json))
-
-        return {}
+        console.log(json);
     }
 
-    componentWillMount() {
-        this.getData().then(data => {
-            //this.setState({ model: data })
-        })
+    componentDidMount() {
+        this.getData();
     }
 
     render() {
