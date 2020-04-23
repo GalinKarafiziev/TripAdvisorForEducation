@@ -70,12 +70,6 @@ namespace TripAdvisorForEducation.Services
             _reviewRepository.Update(review);
             _reviewRepository.SaveChanges();
 
-            user.Reviews.Remove(review);
-            product.Reviews.Remove(review);
-
-            user.Reviews.Add(review);
-            product.Reviews.Add(review);
-
             if (user.Reviews.Contains(review) && product.Reviews.Contains(review))
                 return review;
             

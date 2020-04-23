@@ -34,10 +34,26 @@ namespace TripAdvisorForEducation.Web.Controllers
                 productViewModel.Website,
                 productViewModel.Name,
                 productViewModel.CategoryId,
-                productViewModel.UserId));
+                productViewModel.UserId
+                ));
+        
+        [HttpPut("{productid}")]
+        public IActionResult UpdateProduct([FromBody]ProductViewModel productViewModel) =>
+            Json(_productService.UpdateProduct(productViewModel.Description,
+                productViewModel.Website,
+                productViewModel.Name,
+                productViewModel.CategoryId,
+                productViewModel.productID
+                ));
+
+        [HttpDelete("{productid}")]
+        public IActionResult DeleteProduct(string productID) => Json(_productService.DeleteProduct(productID));
+   
 
         public class ProductViewModel
         {
+            public string productID { get; set; }
+
             public string Description { get; set; }
 
             public string Website { get; set; }

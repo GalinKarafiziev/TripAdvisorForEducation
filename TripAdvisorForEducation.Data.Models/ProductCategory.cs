@@ -1,5 +1,8 @@
-﻿namespace TripAdvisorForEducation.Data.Models
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace TripAdvisorForEducation.Data.Models
 {
+    [Table("ProductCategory")]
     public class ProductCategory
     {
         public string ProductId { get; set; }

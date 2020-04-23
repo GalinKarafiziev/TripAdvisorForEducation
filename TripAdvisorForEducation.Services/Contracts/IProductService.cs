@@ -17,5 +17,9 @@ namespace TripAdvisorForEducation.Services
         List<Category> GetProductCategories(string productId);
 
         Product AddProduct(string description, string website, string name, string categoryId, string userId);
+
+        Product UpdateProduct(string description, string website, string name, string categoryId, string ProductID);
+
+        bool DeleteProduct(string productID);
     }
 }
