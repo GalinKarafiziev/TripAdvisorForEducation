@@ -14,14 +14,7 @@ namespace TripAdvisorForEducation.Web.Areas.Identity
     {
         public void Configure(IWebHostBuilder builder)
         {
-            builder.ConfigureServices((context, services) => {
-                services.AddDbContext<TripAdvisorForEducationWebContext>(options =>
-                    options.UseSqlServer(
-                        context.Configuration.GetConnectionString("TripAdvisorForEducationWebContextConnection")));
-
-                services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                    .AddEntityFrameworkStores<TripAdvisorForEducationWebContext>();
-            });
+           
         }
     }
 }

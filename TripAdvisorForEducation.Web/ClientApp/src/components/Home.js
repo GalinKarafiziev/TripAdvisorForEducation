@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import authService from './api-authorization/AuthorizeService'
+import { Button } from '@material-ui/core'
 
 export class Home extends Component {
     constructor(props) {
@@ -39,6 +40,7 @@ export class Home extends Component {
                 <div>
                     Hello {userName}
                 </div>
+                <Button></Button>
                 <div>
                     Description {description}
                 </div>
