@@ -40,7 +40,7 @@ export class Home extends Component {
                 <div>
                     Hello {userName}
                 </div>
-                <Button></Button>
+                <Button color="primary">hello helo</Button>
                 <div>
                     Description {description}
                 </div>
