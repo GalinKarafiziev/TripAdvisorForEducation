@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using TripAdvisorForEducation.Data;
+using TripAdvisorForEducation.Web.Data;
 
 [assembly: HostingStartup(typeof(TripAdvisorForEducation.Web.Areas.Identity.IdentityHostingStartup))]
 namespace TripAdvisorForEducation.Web.Areas.Identity
@@ -14,8 +14,7 @@ namespace TripAdvisorForEducation.Web.Areas.Identity
     {
         public void Configure(IWebHostBuilder builder)
         {
-            builder.ConfigureServices((context, services) => {
-            });
+           
         }
     }
 }
