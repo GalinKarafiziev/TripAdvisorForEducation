@@ -1,22 +1,25 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.Linq;
+using System.Threading.Tasks;
 using TripAdvisorForEducation.Services;
 
 namespace TripAdvisorForEducation.Web.Controllers
 {
-    [Route("categories")]
+    [ApiController]
+    [Route("[controller]")]
     public class CategoryController : Controller
     {
         private readonly ICategoryService _categoryService;
 
-        public CategoryController(ICategoryService categoryService)
-        {
+        public CategoryController(ICategoryService categoryService) => 
             _categoryService = categoryService;
-        }
 
         [HttpGet]
-        public IActionResult GetCategories() => Json(_categoryService.GetCategories());
+        public async Task<IActionResult> GetCategoriesAsync() => 
+           Json((await _categoryService.GetCategoriesAsync()).ToList());
 
-        [HttpGet("products/{categoryId}")]
-        public IActionResult GetCategoryProducts([FromRoute]string categoryId) => Json(_categoryService.GetCategoryProducts(categoryId));
+        [HttpGet("products/{categoryId:guidid}")]
+        public async Task<IActionResult> GetCategoryProductsAsync([FromRoute]string categoryId) => 
+            Json((await _categoryService.GetCategoryProductsAsync(categoryId)).ToList());
     }
 }

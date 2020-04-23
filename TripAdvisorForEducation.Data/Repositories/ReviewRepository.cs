@@ -9,7 +9,6 @@ namespace TripAdvisorForEducation.Data.Repositories
         public ReviewRepository(TripAdvisorForEducationDbContext context) 
             : base(context)
         {
-            
         }
     }
 }

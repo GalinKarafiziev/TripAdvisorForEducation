@@ -1,22 +1,26 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
 using TripAdvisorForEducation.Services.Contracts;
 
 namespace TripAdvisorForEducation.Web.Controllers
 {
-    [Route("company")]
+    [ApiController]
+    [Route("[controller]")]
     public class CompanyController : Controller
     {
         private readonly ICompanyUserService _companyUserService;
 
-        public CompanyController(ICompanyUserService companyUserService) 
-        {
+        public CompanyController(ICompanyUserService companyUserService) => 
             _companyUserService = companyUserService;
-        }
 
-        [HttpGet("{companyId}")]
-        public IActionResult GetCompany([FromRoute]string companyId) => Json(_companyUserService.GetCompany(companyId));
+        [HttpGet("{companyId:guidid}")]
+        public async Task<IActionResult> GetCompanyAsync([FromRoute]string companyId) =>
+            Json(await _companyUserService.GetCompanyAsync(companyId));
 
-        [HttpGet("products/{companyId}")]
-        public IActionResult GetCompanyProducts([FromRoute]string companyId) => Json(_companyUserService.GetCompanyProducts(companyId));
+        [HttpGet("products/{companyId:guidid}")]
+        public async Task<IActionResult> GetCompanyProductsAsync([FromRoute]string companyId) => 
+            Json((await _companyUserService.GetCompanyProductsAsync(companyId)).ToList());
     }
 }

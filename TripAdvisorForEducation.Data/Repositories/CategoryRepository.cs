@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using System.Threading.Tasks;
 using TripAdvisorForEducation.Data.Models;
 using TripAdvisorForEducation.Data.Repositories.Base;
 using TripAdvisorForEducation.Data.Repositories.Contracts;
+using TripAdvisorForEducation.Data.Repositories.Extensions;
 
 namespace TripAdvisorForEducation.Data.Repositories
 {
@@ -15,16 +15,16 @@ namespace TripAdvisorForEducation.Data.Repositories
         {
         }
 
-        public IQueryable<ProductCategory> GetCategoryProducts(string categoryId)
+        public async Task<IEnumerable<Product>> GetCategoryProductsAsync(string categoryId)
         {
-            var category = GetById(categoryId);
+            var category = await GetByIdAsync(categoryId);
+            await category.LoadEntityCollectionAsync(Context, x => x.Products);
 
-            Context
-                .Entry(category)
-                .Collection(x => x.Products)
-                .Load();
+            var loadedProductsReferences = category
+                .Products
+                .Select(async x => (await x.LoadEntityReferenceAsync(Context, x => x.Product)).Product);
 
-            return category.Products.AsQueryable();
+            return await Task.WhenAll(loadedProductsReferences);
         }
     }
 }

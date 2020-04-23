@@ -1,25 +1,24 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using TripAdvisorForEducation.Data.Models;
-using Microsoft.AspNetCore.Mvc;
+using TripAdvisorForEducation.Data.ViewModels;
 
 namespace TripAdvisorForEducation.Services
 {
     public interface IProductService
     {
-        List<Product> GetProducts();
+        Task<IEnumerable<Product>> GetProductsAsync();
 
-        Product GetProduct(string productId);
+        Task<Product> GetProductAsync(string productId);
 
-        List<Review> GetProductReviews(string productId);
+        Task<IEnumerable<Review>> GetProductReviewsAsync(string productId);
 
-        CompanyUser GetProductCompany(string productId);
+        Task<CompanyUser> GetProductCompanyAsync(string productId);
 
-        List<Category> GetProductCategories(string productId);
+        Task<IEnumerable<Category>> GetProductCategoriesAsync(string productId);
 
-        Product AddProduct(string description, string website, string name, string categoryId, string userId);
+        Task<(bool success, string productId)> AddProductAsync(ProductViewModel productViewModel);
 
-        Product UpdateProduct(string description, string website, string name, string categoryId, string ProductID);
-
-        bool DeleteProduct(string productID);
+        Task<bool> DeleteProductAsync(string productId);
     }
 }

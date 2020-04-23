@@ -1,14 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using TripAdvisorForEducation.Data.Models;
 
 namespace TripAdvisorForEducation.Services
 {
     public interface ICategoryService
     {
-        List<Category> GetCategories();
+        Task<IEnumerable<Category>> GetCategoriesAsync();
 
-        List<ProductCategory> GetCategoryProducts(string categoryId);
+        Task<IEnumerable<Product>> GetCategoryProductsAsync(string categoryId);
     }
 }

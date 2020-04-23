@@ -5,7 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="CuttingEdge.Conditions" Version="1.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\TripAdvisorForEducation.Data.Models\TripAdvisorForEducation.Data.Models.csproj" />
+    <ProjectReference Include="..\TripAdvisorForEducation.Data.ViewModels\TripAdvisorForEducation.Data.ViewModels.csproj" />
     <ProjectReference Include="..\TripAdvisorForEducation.Data\TripAdvisorForEducation.Data.csproj" />
   </ItemGroup>
 

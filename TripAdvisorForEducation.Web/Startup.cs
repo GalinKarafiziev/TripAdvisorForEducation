@@ -11,6 +11,9 @@ using TripAdvisorForEducation.Services;
 using Microsoft.AspNetCore.Identity;
 using Newtonsoft.Json.Serialization;
 using Newtonsoft.Json;
+using AutoMapper;
+using TripAdvisorForEducation.Web.Utilities;
+using Microsoft.AspNetCore.Routing;
 
 namespace TripAdvisorForEducation.Web
 {
@@ -27,39 +30,44 @@ namespace TripAdvisorForEducation.Web
         {
             services.AddDbContext<TripAdvisorForEducationDbContext>(options =>
                 options.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection"))) ;
+                    Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
+                .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<TripAdvisorForEducationDbContext>();
-
-            services.AddIdentityServer()
-                .AddApiAuthorization<IdentityUser, TripAdvisorForEducationDbContext>();
 
             services.AddAuthentication()
                 .AddIdentityServerJwt();
 
-            services.RegisterRepositories();
-            services.RegisterServices();
+            services.AddIdentityServer()
+                .AddApiAuthorization<IdentityUser, TripAdvisorForEducationDbContext>();
+
+            services.AddAuthorization();
 
             services.AddControllers()
-                .AddNewtonsoftJson(options => 
+                .AddNewtonsoftJson(options =>
                 {
                     options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
                     options.SerializerSettings.Formatting = Formatting.Indented;
                     options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
                 });
 
-            // In production, the React files will be served from this directory
-            services.AddSpaStaticFiles(configuration =>
-            {
-                configuration.RootPath = "ClientApp/build";
-            });
+            services.AddMvc();
+
+            services.Configure<RouteOptions>(options =>
+                options.ConstraintMap.Add("guidid", typeof(GuidIdRouteConstraint)));
+
+            services.AddRazorPages();
+            services.RegisterRepositories();
+            services.RegisterServices();
+            services.AddAutoMapper(typeof(Startup));
+            services.AddSpaStaticFiles(configuration => configuration.RootPath = "ClientApp/build");
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            //UpdateDatabase(app);
+            app.UpdateDatabaseAsync().GetAwaiter().GetResult();
 
             if (env.IsDevelopment())
             {
@@ -82,11 +90,13 @@ namespace TripAdvisorForEducation.Web
             app.UseAuthentication();
             app.UseIdentityServer();
             app.UseAuthorization();
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller}/{action=Index}/{id?}");
+                endpoints.MapControllers();
                 endpoints.MapRazorPages();
             });
 
@@ -99,13 +109,6 @@ namespace TripAdvisorForEducation.Web
                     spa.UseReactDevelopmentServer(npmScript: "start");
                 }
             });
-        }
-
-        private static void UpdateDatabase(IApplicationBuilder app)
-        {
-            using var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope();
-            using var context = serviceScope.ServiceProvider.GetService<TripAdvisorForEducationDbContext>();
-            context.Database.Migrate();
         }
     }
 }

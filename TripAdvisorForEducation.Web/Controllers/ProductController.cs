@@ -1,68 +1,52 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.Linq;
+using System.Threading.Tasks;
+using TripAdvisorForEducation.Data.ViewModels;
 using TripAdvisorForEducation.Services;
 
 namespace TripAdvisorForEducation.Web.Controllers
 {
-    [Route("products")]
+    [ApiController]
+    [Route("[controller]")]
     public class ProductController : Controller
     {
         private readonly IProductService _productService;
 
-        public ProductController(IProductService productService)
-        {
+        public ProductController(IProductService productService) => 
             _productService = productService;
-        }
 
         [HttpGet]
-        public IActionResult GetProducts() => Json(_productService.GetProducts());
+        public async Task<IActionResult> GetProductsAsync() => 
+            Json((await _productService.GetProductsAsync()).ToList());
 
-        [HttpGet("{productId}")]
-        public IActionResult GetProduct([FromRoute]string productId) => Json(_productService.GetProduct(productId));
+        [HttpGet("{productId:guidid}")]
+        public async Task<IActionResult> GetProductAsync([FromRoute]string productId) => 
+            Json(await _productService.GetProductAsync(productId));
 
-        [HttpGet("reviews/{productId}")]
-        public IActionResult GetProductReviews([FromRoute]string productId) => Json(_productService.GetProductReviews(productId));
+        [HttpGet("reviews/{productId:guidid}")]
+        public async Task<IActionResult> GetProductReviewsAsync([FromRoute]string productId) => 
+            Json((await _productService.GetProductReviewsAsync(productId)).ToList());
 
-        [HttpGet("company/{productId}")]
-        public IActionResult GetProductCompany([FromRoute]string productId) => Json(_productService.GetProductCompany(productId));
+        [HttpGet("company/{productId:guidid}")]
+        public async Task<IActionResult> GetProductCompanyAsync([FromRoute]string productId) => 
+            Json(await _productService.GetProductCompanyAsync(productId));
 
-        [HttpGet("categories/{productId}")]
-        public IActionResult GetProductCategories([FromRoute]string productId) => Json(_productService.GetProductCategories(productId));
+        [HttpGet("categories/{productId:guidid}")]
+        public async Task<IActionResult> GetProductCategoriesAsync([FromRoute]string productId) => 
+            Json((await _productService.GetProductCategoriesAsync(productId)).ToList());
 
-        [HttpPost]
-        public IActionResult AddProduct([FromBody]ProductViewModel productViewModel) => 
-            Json(_productService.AddProduct(productViewModel.Description,
-                productViewModel.Website,
-                productViewModel.Name,
-                productViewModel.CategoryId,
-                productViewModel.UserId
-                ));
-        
-        [HttpPut("{productid}")]
-        public IActionResult UpdateProduct([FromBody]ProductViewModel productViewModel) =>
-            Json(_productService.UpdateProduct(productViewModel.Description,
-                productViewModel.Website,
-                productViewModel.Name,
-                productViewModel.CategoryId,
-                productViewModel.productID
-                ));
-
-        [HttpDelete("{productid}")]
-        public IActionResult DeleteProduct(string productID) => Json(_productService.DeleteProduct(productID));
-   
-
-        public class ProductViewModel
+        [HttpPost("new")]
+        public async Task<IActionResult> AddProductAsync([FromBody]ProductViewModel productViewModel)
         {
-            public string productID { get; set; }
+            var (success, productId) = await _productService.AddProductAsync(productViewModel);
+            return success ? Ok(new { productID = productId }) : (IActionResult)BadRequest();
+        }
 
-            public string Description { get; set; }
-
-            public string Website { get; set; }
-
-            public string Name { get; set; }
-
-            public string CategoryId { get; set; }
-
-            public string UserId { get; set; }
+        [HttpDelete("{productId:guidid}")]
+        public async Task<IActionResult> DeleteProductAsync(string productId)
+        {
+            var success = await _productService.DeleteProductAsync(productId);
+            return success ? Ok() : (IActionResult)BadRequest();
         }
     }
 }

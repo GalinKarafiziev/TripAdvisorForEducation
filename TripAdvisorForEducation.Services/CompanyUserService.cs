@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
+using System.Threading.Tasks;
 using TripAdvisorForEducation.Data.Models;
 using TripAdvisorForEducation.Data.Repositories.Contracts;
 using TripAdvisorForEducation.Services.Contracts;
@@ -10,14 +10,16 @@ namespace TripAdvisorForEducation.Services
     {
         private readonly ICompanyUserRepository _companyUserRepository;
 
-        public CompanyUserService(ICompanyUserRepository companyUserRepository)
-        {
+        public CompanyUserService(ICompanyUserRepository companyUserRepository) => 
             _companyUserRepository = companyUserRepository;
-        }
 
-        public CompanyUser GetCompany(string id) => _companyUserRepository.GetById(id);
+        public async Task<IEnumerable<CompanyUser>> GetCompanyUsersAsync() => 
+            await _companyUserRepository.AllAsync();
 
-        public List<Product> GetCompanyProducts(string companyId) 
-            => _companyUserRepository.GetCompanyProducts(companyId).ToList();
+        public async Task<CompanyUser> GetCompanyAsync(string id) => 
+            await _companyUserRepository.GetByIdAsync(id);
+
+        public async Task<IEnumerable<Product>> GetCompanyProductsAsync(string companyId) => 
+            await _companyUserRepository.GetCompanyProductsAsync(companyId);
     }
 }

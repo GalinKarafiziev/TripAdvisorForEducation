@@ -1,22 +1,23 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace TripAdvisorForEducation.Data.Repositories.Contracts
 {
     public interface IRepository<T>
         where T : class
     {
-        IQueryable<T> All();
+        Task<IEnumerable<T>> AllAsync();
 
-        T GetById(string id);
+        Task<T> GetByIdAsync(string id);
 
-        void Add(T entity);
+        Task AddAsync(T entity);
 
-        void Update(T entity);
+        Task UpdateAsync(T entity);
 
-        void Delete(T entity);
+        Task DeleteAsync(T entity);
 
-        void Delete(string id);
+        Task DeleteAsync(string id);
 
-        int SaveChanges();
+        Task<int> SaveChangesAsync();
     }
 }

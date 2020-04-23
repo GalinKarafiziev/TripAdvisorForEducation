@@ -1,4 +1,7 @@
-﻿using System.Linq;
+﻿using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using TripAdvisorForEducation.Data.Models;
 using TripAdvisorForEducation.Data.Repositories.Base;
 using TripAdvisorForEducation.Data.Repositories.Contracts;
@@ -13,7 +16,12 @@ namespace TripAdvisorForEducation.Data.Repositories
         {
         }
 
-        public IQueryable<Product> GetCompanyProducts(string companyId) => 
-            GetById(companyId).LoadEntityCollection(Context, x => x.Products).Products.AsQueryable();
+        public async Task<IEnumerable<Product>> GetCompanyProductsAsync(string companyId)
+        {
+            var company = await GetByIdAsync(companyId);
+            await company.LoadEntityCollectionAsync(Context, x => x.Products);
+
+            return company.Products;
+        }
     }
 }

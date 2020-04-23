@@ -1,6 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using TripAdvisorForEducation.Data.Models;
 using TripAdvisorForEducation.Data.Repositories.Contracts;
 
 namespace TripAdvisorForEducation.Services
@@ -9,9 +9,10 @@ namespace TripAdvisorForEducation.Services
     {
         private readonly IAcademicsUserRepository _academicUserRepository;
 
-        public AcademicsUserService(IAcademicsUserRepository academicsUserRepository)
-        {
-            this._academicUserRepository = academicsUserRepository;
-        }
+        public AcademicsUserService(IAcademicsUserRepository academicsUserRepository) => 
+            _academicUserRepository = academicsUserRepository;
+
+        public async Task<IEnumerable<AcademicsUser>> GetAcademicsUsersAsync() => 
+            await _academicUserRepository.AllAsync();
     }
 }
