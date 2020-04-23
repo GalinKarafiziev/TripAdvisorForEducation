@@ -18,9 +18,9 @@ namespace TripAdvisorForEducation.Data
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            builder.ApplyConfiguration(new ProductCategoryConfiguration());
-
             base.OnModelCreating(builder);
+
+            builder.ApplyConfiguration(new ProductCategoryConfiguration());
         }
 
         public DbContext DbContext => this;

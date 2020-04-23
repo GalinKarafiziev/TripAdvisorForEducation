@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace TripAdvisorForEducation.Services
+﻿namespace TripAdvisorForEducation.Services
 {
     public interface IReviewService
     {

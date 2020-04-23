@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System;
-using System.Linq;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using TripAdvisorForEducation.Data.Repositories.Contracts;
 
 namespace TripAdvisorForEducation.Data.Repositories.Base
@@ -18,49 +18,53 @@ namespace TripAdvisorForEducation.Data.Repositories.Base
 
         protected TripAdvisorForEducationDbContext Context { get; set; }
 
-        public virtual IQueryable<T> All() => this.DbSet.AsQueryable();
+        public async virtual Task<IEnumerable<T>> AllAsync() => await DbSet.ToListAsync();
 
-        public virtual T GetById(string id) => this.DbSet.Find(id);
+        public async virtual Task<T> GetByIdAsync(string id) => await DbSet.FindAsync(id);
 
-        public virtual void Add(T entity)
+        public async virtual Task AddAsync(T entity)
         {
-            EntityEntry entry = Context.Entry(entity);
+            var entry = Context.Entry(entity);
 
             if (entry.State != EntityState.Detached)
                 entry.State = EntityState.Added;
             else
-                DbSet.Add(entity);
+                await DbSet.AddAsync(entity);
+
+            await Context.SaveChangesAsync();
         }
 
-        public virtual void Update(T entity)
+        public async virtual Task UpdateAsync(T entity)
         {
-            EntityEntry entry = Context.Entry(entity);
+            var entry = Context.Entry(entity);
 
             if (entry.State == EntityState.Detached)
                 DbSet.Attach(entity);
 
             entry.State = EntityState.Modified;
+            await Context.SaveChangesAsync();   
         }
 
-        public virtual void Delete(T entity)
+        public async virtual Task DeleteAsync(T entity)
         {
-            EntityEntry entry = Context.Entry(entity);
+            var entry = Context.Entry(entity);
 
             if (entry.State != EntityState.Deleted)
                 entry.State = EntityState.Deleted;
             else
-                DbSet.Attach(entity);
                 DbSet.Remove(entity);
+
+            await Context.SaveChangesAsync();
         }
 
-        public virtual void Delete(string id)
+        public async virtual Task DeleteAsync(string id)
         {
-            var entity = GetById(id);
+            var entity = await GetByIdAsync(id);
 
             if (entity != null)
-                Delete(entity);
+                await DeleteAsync(entity);
         }
 
-        public int SaveChanges() => Context.SaveChanges();
+        public async Task<int> SaveChangesAsync() => await Context.SaveChangesAsync();
     }
 }

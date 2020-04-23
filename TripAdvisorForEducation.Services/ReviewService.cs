@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using TripAdvisorForEducation.Data.Repositories.Contracts;
+﻿using TripAdvisorForEducation.Data.Repositories.Contracts;
 
 namespace TripAdvisorForEducation.Services
 {
@@ -9,9 +6,7 @@ namespace TripAdvisorForEducation.Services
     {
         private readonly IReviewRepository _reviewRepository;
 
-        public ReviewService(IReviewRepository reviewRepository)
-        {
-            this._reviewRepository = reviewRepository;
-        }
+        public ReviewService(IReviewRepository reviewRepository) => 
+            _reviewRepository = reviewRepository;
     }
 }

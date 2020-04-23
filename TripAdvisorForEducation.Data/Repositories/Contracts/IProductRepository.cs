@@ -1,14 +1,15 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using TripAdvisorForEducation.Data.Models;
 
 namespace TripAdvisorForEducation.Data.Repositories.Contracts
 {
     public interface IProductRepository : IRepository<Product>
     {
-        IQueryable<Review> GetProductReviews(string productId);
+        Task<IEnumerable<Review>> GetProductReviewsAsync(string productId);
 
-        IQueryable<Category> GetProductCategories(string productId);
+        Task<IEnumerable<Category>> GetProductCategoriesAsync(string productId);
 
-        CompanyUser GetProductCompany(string productId);
+        Task<CompanyUser> GetProductCompanyAsync(string productId);
     }
 }

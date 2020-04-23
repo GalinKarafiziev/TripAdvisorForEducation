@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using TripAdvisorForEducation.Data.Models;
 using TripAdvisorForEducation.Data.Repositories.Base;
 using TripAdvisorForEducation.Data.Repositories.Contracts;
@@ -13,16 +15,32 @@ namespace TripAdvisorForEducation.Data.Repositories
         {
         }
 
-        public IQueryable<Category> GetProductCategories(string productId) =>
-            GetById(productId)
-                .LoadEntityCollection(Context, x => x.Categories).Categories
-                .Select(x => x.LoadEntityReference(Context, x => x.Category).Category)
-                .AsQueryable();
+        public async Task<IEnumerable<Category>> GetProductCategoriesAsync(string productId)
+        {
+            var product = await GetByIdAsync(productId);
+            await product.LoadEntityCollectionAsync(Context, x => x.Categories);
 
-        public CompanyUser GetProductCompany(string productId) =>
-            GetById(productId).LoadEntityReference(Context, x => x.User).User;
+            var loadedCategoriesReferences = product
+                .Categories
+                .Select(async x => (await x.LoadEntityReferenceAsync(Context, x => x.Category)).Category);
 
-        public IQueryable<Review> GetProductReviews(string productId) =>
-            GetById(productId).LoadEntityCollection(Context, x => x.Reviews).Reviews.AsQueryable();
+            return await Task.WhenAll(loadedCategoriesReferences);
+        }
+
+        public async Task<CompanyUser> GetProductCompanyAsync(string productId)
+        {
+            var product = await GetByIdAsync(productId);
+            await product.LoadEntityReferenceAsync(Context, x => x.User);
+
+            return product.User;
+        }
+
+        public async Task<IEnumerable<Review>> GetProductReviewsAsync(string productId)
+        {
+            var product = await GetByIdAsync(productId);
+            await product.LoadEntityCollectionAsync(Context, x => x.Reviews);
+
+            return product.Reviews;
+        }
     }
 }

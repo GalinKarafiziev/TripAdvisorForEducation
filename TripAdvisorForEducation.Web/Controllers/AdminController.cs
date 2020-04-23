@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using TripAdvisorForEducation.Services;
 using TripAdvisorForEducation.Services.Contracts;
 
@@ -23,14 +23,12 @@ namespace TripAdvisorForEducation.Web.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetUsers()
+        public async Task<IActionResult> GetUsersAsync()
         {
-            var academicsUsers = _academicsUserService.GetAcademicsUsers().Cast<IdentityUser>();
-            var companyUsers = _companyUserService.GetCompanyUsers().Cast<IdentityUser>();
+            var academicsUsers = (await _academicsUserService.GetAcademicsUsersAsync()).Cast<IdentityUser>();
+            var companyUsers = (await _companyUserService.GetCompanyUsersAsync()).Cast<IdentityUser>();
 
-            var res = academicsUsers.Union(companyUsers);
-
-            return Json(res);
+            return Json(academicsUsers.Concat(companyUsers));
         } 
     }
 }

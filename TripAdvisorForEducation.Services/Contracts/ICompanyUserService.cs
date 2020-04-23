@@ -1,14 +1,15 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using TripAdvisorForEducation.Data.Models;
 
 namespace TripAdvisorForEducation.Services.Contracts
 {
     public interface ICompanyUserService
     {
-        List<CompanyUser> GetCompanyUsers();
+        Task<IEnumerable<CompanyUser>> GetCompanyUsersAsync();
         
-        CompanyUser GetCompany(string id);
+        Task<CompanyUser> GetCompanyAsync(string id);
 
-        List<Product> GetCompanyProducts(string id);
+        Task<IEnumerable<Product>> GetCompanyProductsAsync(string id);
     }
 }

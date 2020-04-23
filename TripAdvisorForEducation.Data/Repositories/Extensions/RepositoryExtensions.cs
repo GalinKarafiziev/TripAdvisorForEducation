@@ -2,37 +2,38 @@
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 
 namespace TripAdvisorForEducation.Data.Repositories.Extensions
 {
     public static class RepositoryExtensions
     {
-        public static TEntity LoadEntityCollection<TEntity, TProperty>(
+        public async static Task<TEntity> LoadEntityCollectionAsync<TEntity, TProperty>(
             this TEntity entity, 
             DbContext context, 
             Expression<Func<TEntity, IEnumerable<TProperty>>> propertyExpression) 
             where TEntity : class
             where TProperty : class
         {
-            context
+            await context
                 .Entry(entity)
                 .Collection(propertyExpression)
-                .Load();
+                .LoadAsync();
 
             return entity;
         }
 
-        public static TEntity LoadEntityReference<TEntity, TProperty>(
+        public async static Task<TEntity> LoadEntityReferenceAsync<TEntity, TProperty>(
             this TEntity entity,
             DbContext context,
             Expression<Func<TEntity, TProperty>> propertyExpression)
             where TEntity : class
             where TProperty : class
         {
-            context
+            await context
                 .Entry(entity)
                 .Reference(propertyExpression)
-                .Load();
+                .LoadAsync();
 
             return entity;
         }

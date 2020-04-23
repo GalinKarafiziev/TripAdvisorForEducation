@@ -12,6 +12,8 @@ using Microsoft.AspNetCore.Identity;
 using Newtonsoft.Json.Serialization;
 using Newtonsoft.Json;
 using AutoMapper;
+using TripAdvisorForEducation.Web.Utilities;
+using Microsoft.AspNetCore.Routing;
 
 namespace TripAdvisorForEducation.Web
 {
@@ -51,6 +53,10 @@ namespace TripAdvisorForEducation.Web
                 });
 
             services.AddMvc();
+
+            services.Configure<RouteOptions>(options =>
+                options.ConstraintMap.Add("guidid", typeof(GuidIdRouteConstraint)));
+
             services.AddRazorPages();
             services.RegisterRepositories();
             services.RegisterServices();
@@ -61,6 +67,8 @@ namespace TripAdvisorForEducation.Web
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UpdateDatabaseAsync().GetAwaiter().GetResult();
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -73,7 +81,6 @@ namespace TripAdvisorForEducation.Web
                 app.UseHsts();
             }
 
-            app.UpdateDatabase();
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseSpaStaticFiles();

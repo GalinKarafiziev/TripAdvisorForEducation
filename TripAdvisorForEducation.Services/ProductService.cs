@@ -3,6 +3,7 @@ using CuttingEdge.Conditions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using TripAdvisorForEducation.Data.Models;
 using TripAdvisorForEducation.Data.Repositories.Contracts;
 using TripAdvisorForEducation.Data.ViewModels;
@@ -20,27 +21,29 @@ namespace TripAdvisorForEducation.Services
             _mapper = mapper;
         }
 
-        public Product GetProduct(string productId) => _productRepository.GetById(productId);
+        public async Task<Product> GetProductAsync(string productId) =>
+            await _productRepository.GetByIdAsync(productId);
 
-        public List<Product> GetProducts() => _productRepository.All().ToList();
+        public async Task<IEnumerable<Product>> GetProductsAsync() =>
+            await _productRepository.AllAsync();
 
-        public List<Review> GetProductReviews(string productId)
+        public async Task<IEnumerable<Review>> GetProductReviewsAsync(string productId)
         {
-            var result = _productRepository.GetProductReviews(productId).ToList();
+            var result = await _productRepository.GetProductReviewsAsync(productId);
 
             if (result == null)
-                return new List<Review>();
+                return Enumerable.Empty<Review>();
 
             return result;
         }
 
-        public CompanyUser GetProductCompany(string productId) => 
-            _productRepository.GetProductCompany(productId);
+        public async Task<CompanyUser> GetProductCompanyAsync(string productId) =>
+            await _productRepository.GetProductCompanyAsync(productId);
 
-        public List<Category> GetProductCategories(string productId) => 
-            _productRepository.GetProductCategories(productId).ToList();
+        public async Task<IEnumerable<Category>> GetProductCategoriesAsync(string productId) =>
+            await _productRepository.GetProductCategoriesAsync(productId);
 
-        public (bool success, string productId) AddProduct(ProductViewModel productViewModel)
+        public async Task<(bool success, string productId)> AddProductAsync(ProductViewModel productViewModel)
         {
             try
             {
@@ -50,7 +53,7 @@ namespace TripAdvisorForEducation.Services
                 Condition.Requires(productViewModel.CategoryIds, nameof(productViewModel.CategoryIds)).IsNotEmpty();
 
                 var product = _mapper.Map<Product>(productViewModel);
-                _productRepository.Add(product);
+                await _productRepository.AddAsync(product);
 
                 foreach (var categoryId in productViewModel.CategoryIds)
                 {
@@ -64,7 +67,7 @@ namespace TripAdvisorForEducation.Services
                     });
                 }
 
-                _productRepository.SaveChanges();
+                await _productRepository.SaveChangesAsync();
 
                 return (true, product.ProductId);
             }
@@ -74,14 +77,13 @@ namespace TripAdvisorForEducation.Services
             }
         }
 
-        public bool DeleteProduct(string productId)
+        public async Task<bool> DeleteProductAsync(string productId)
         {
             try
             {
                 Condition.Requires(productId, nameof(productId)).IsNotNullOrEmpty();
-                
-                _productRepository.Delete(productId);
-                _productRepository.SaveChanges();
+
+                await _productRepository.DeleteAsync(productId);
 
                 return true;
             }

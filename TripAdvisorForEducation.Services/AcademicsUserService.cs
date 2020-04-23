@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
+using System.Threading.Tasks;
 using TripAdvisorForEducation.Data.Models;
 using TripAdvisorForEducation.Data.Repositories.Contracts;
 
@@ -9,11 +9,10 @@ namespace TripAdvisorForEducation.Services
     {
         private readonly IAcademicsUserRepository _academicUserRepository;
 
-        public AcademicsUserService(IAcademicsUserRepository academicsUserRepository)
-        {
-            this._academicUserRepository = academicsUserRepository;
-        }
+        public AcademicsUserService(IAcademicsUserRepository academicsUserRepository) => 
+            _academicUserRepository = academicsUserRepository;
 
-        public List<AcademicsUser> GetAcademicsUsers() => _academicUserRepository.All().ToList();
+        public async Task<IEnumerable<AcademicsUser>> GetAcademicsUsersAsync() => 
+            await _academicUserRepository.AllAsync();
     }
 }

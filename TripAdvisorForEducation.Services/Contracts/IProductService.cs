@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using TripAdvisorForEducation.Data.Models;
 using TripAdvisorForEducation.Data.ViewModels;
 
@@ -6,18 +7,18 @@ namespace TripAdvisorForEducation.Services
 {
     public interface IProductService
     {
-        List<Product> GetProducts();
+        Task<IEnumerable<Product>> GetProductsAsync();
 
-        Product GetProduct(string productId);
+        Task<Product> GetProductAsync(string productId);
 
-        List<Review> GetProductReviews(string productId);
+        Task<IEnumerable<Review>> GetProductReviewsAsync(string productId);
 
-        CompanyUser GetProductCompany(string productId);
+        Task<CompanyUser> GetProductCompanyAsync(string productId);
 
-        List<Category> GetProductCategories(string productId);
+        Task<IEnumerable<Category>> GetProductCategoriesAsync(string productId);
 
-        (bool success, string productId) AddProduct(ProductViewModel productViewModel);
+        Task<(bool success, string productId)> AddProductAsync(ProductViewModel productViewModel);
 
-        bool DeleteProduct(string productId);
+        Task<bool> DeleteProductAsync(string productId);
     }
 }
