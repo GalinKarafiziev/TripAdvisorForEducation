@@ -15,7 +15,7 @@ namespace TripAdvisorForEducation.Web.Controllers
             _categoryService = categoryService;
 
         [HttpGet]
-        public async Task<IActionResult> GetCategoriesAsync() => 
+        public async Task<IActionResult> GetCategoriesAsync() =>
            Json((await _categoryService.GetCategoriesAsync()).ToList());
 
         [HttpGet("products/{categoryId:guidid}")]

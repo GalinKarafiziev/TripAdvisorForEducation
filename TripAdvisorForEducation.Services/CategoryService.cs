@@ -27,6 +27,7 @@ namespace TripAdvisorForEducation.Services
             catch (Exception ex)
             {
                 // TODO: Implement logging functionality (Logger) for this and the rest of the services.
+                // TODO: Add try/catch in all services
 
                 return Enumerable.Empty<Product>();
             }

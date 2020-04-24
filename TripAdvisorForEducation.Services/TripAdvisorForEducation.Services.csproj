@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <PackageReference Include="CuttingEdge.Conditions" Version="1.2.0" />
+    <PackageReference Include="MailKit" Version="2.6.0" />
   </ItemGroup>
 
   <ItemGroup>

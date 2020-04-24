@@ -14,6 +14,7 @@ using Newtonsoft.Json;
 using AutoMapper;
 using TripAdvisorForEducation.Web.Utilities;
 using Microsoft.AspNetCore.Routing;
+using TripAdvisorForEducation.Services.Messaging;
 
 namespace TripAdvisorForEducation.Web
 {
@@ -43,6 +44,11 @@ namespace TripAdvisorForEducation.Web
                 .AddApiAuthorization<IdentityUser, TripAdvisorForEducationDbContext>();
 
             services.AddAuthorization();
+
+            var emailConfig = Configuration
+                .GetSection("EmailConfiguration")
+                .Get<EmailConfiguration>();
+            services.AddSingleton(emailConfig);
 
             services.AddControllers()
                 .AddNewtonsoftJson(options =>

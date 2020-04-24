@@ -12,7 +12,8 @@ namespace TripAdvisorForEducation.Data
             services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<IAcademicsUserRepository, AcademicsUserRepository>();
             services.AddScoped<ICompanyUserRepository, CompanyUserRepository>();
-            services.AddScoped<IProductRepository, ProductRepository>();  
+            services.AddScoped<IProductRepository, ProductRepository>();
+            services.AddScoped<IPendingCompanyRepository, PendingCompanyRepository>();  
         }
     }
 }

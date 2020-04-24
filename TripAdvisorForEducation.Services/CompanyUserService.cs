@@ -17,7 +17,7 @@ namespace TripAdvisorForEducation.Services
             await _companyUserRepository.AllAsync();
 
         public async Task<CompanyUser> GetCompanyAsync(string id) => 
-            await _companyUserRepository.GetByIdAsync(id);
+            await _companyUserRepository.GetByIdAsync(id);  // TODO: Map to CompanyUserViewModel
 
         public async Task<IEnumerable<Product>> GetCompanyProductsAsync(string companyId) => 
             await _companyUserRepository.GetCompanyProductsAsync(companyId);

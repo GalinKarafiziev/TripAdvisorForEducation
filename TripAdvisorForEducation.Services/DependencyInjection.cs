@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using TripAdvisorForEducation.Services.Contracts;
+using TripAdvisorForEducation.Services.Messaging;
 
 namespace TripAdvisorForEducation.Services
 {
@@ -12,6 +13,8 @@ namespace TripAdvisorForEducation.Services
             services.AddScoped<IReviewService, ReviewService>();
             services.AddScoped<IAcademicsUserService, AcademicsUserService>();
             services.AddScoped<ICompanyUserService, CompanyUserService>();
+            services.AddScoped<IPendingCompanyService, PendingCompanyService>();
+            services.AddScoped<IEmailSender, EmailSender>();
         }
     }
 }

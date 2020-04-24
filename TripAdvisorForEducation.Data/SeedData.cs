@@ -35,7 +35,7 @@ namespace TripAdvisorForEducation.Data
             await userManager.CreateAsync(new AcademicsUser()
             {
                 Email = "admin@gmail.com",
-                UserName = "administrator",
+                UserName = "admin@gmail.com",
                 EmailConfirmed = false,
                 PhoneNumberConfirmed = false,
                 TwoFactorEnabled = false,

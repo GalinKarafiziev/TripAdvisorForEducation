@@ -15,11 +15,14 @@ namespace TripAdvisorForEducation.Web.Controllers
     {
         private readonly IAcademicsUserService _academicsUserService;
         private readonly ICompanyUserService _companyUserService;
+        private readonly IPendingCompanyService _pendingCompanyService;
 
-        public AdminController(IAcademicsUserService academicsUserService, ICompanyUserService companyUserService)
+        public AdminController(IAcademicsUserService academicsUserService, ICompanyUserService companyUserService, 
+            IPendingCompanyService pendingCompanyService)
         {
             _academicsUserService = academicsUserService;
             _companyUserService = companyUserService;
+            _pendingCompanyService = pendingCompanyService;
         }
 
         [HttpGet]
@@ -29,6 +32,10 @@ namespace TripAdvisorForEducation.Web.Controllers
             var companyUsers = (await _companyUserService.GetCompanyUsersAsync()).Cast<IdentityUser>();
 
             return Json(academicsUsers.Concat(companyUsers));
-        } 
+        }
+
+        [HttpGet("pending")]
+        public async Task<IActionResult> GetPendingCompanies() =>
+            Json(await _pendingCompanyService.GetPendingCompaniesAsync());
     }
 }

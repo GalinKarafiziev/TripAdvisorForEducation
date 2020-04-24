@@ -23,5 +23,7 @@ namespace TripAdvisorForEducation.Data.Repositories
 
             return company.Products;
         }
+
+        // TODO: GetCompany with loaded products
     }
 }
