@@ -14,7 +14,8 @@ namespace TripAdvisorForEducation.Web.Utilities
             using var context = serviceScope.ServiceProvider.GetService<TripAdvisorForEducationDbContext>();
 
             await context.Database.EnsureCreatedAsync();
-            await context.Database.MigrateAsync();
+            
+            //await context.Database.MigrateAsync();
             await SeedData.InitializeAsync(serviceScope.ServiceProvider);
         }
     }

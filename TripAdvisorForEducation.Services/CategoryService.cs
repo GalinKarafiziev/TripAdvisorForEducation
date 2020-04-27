@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using CuttingEdge.Conditions;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +15,24 @@ namespace TripAdvisorForEducation.Services
 
         public CategoryService(ICategoryRepository categoryRepository) => 
             _categoryRepository = categoryRepository;
+
+        public async Task<(bool success, string categoryId)> AddCategoryAsync(string categoryName)
+        {
+            try
+            {
+                Condition.Requires(categoryName).IsNotNull();
+                Category category = new Category() { CategoryName = categoryName };
+                    await _categoryRepository.AddAsync(category);
+                    await _categoryRepository.SaveChangesAsync();
+                    return (true, category.CategoryId);
+                
+            }
+            catch(Exception ex)
+            {
+                return (false, null);
+            }
+            
+        }
 
         public async Task<IEnumerable<Category>> GetCategoriesAsync() => 
             await _categoryRepository.AllAsync();

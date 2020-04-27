@@ -12,30 +12,30 @@ namespace TripAdvisorForEducation.Web.Controllers
     {
         private readonly IProductService _productService;
 
-        public ProductController(IProductService productService) => 
+        public ProductController(IProductService productService) =>
             _productService = productService;
 
         [HttpGet]
-        public async Task<IActionResult> GetProductsAsync() => 
+        public async Task<IActionResult> GetProductsAsync() =>
             Json((await _productService.GetProductsAsync()).ToList());
 
         [HttpGet("{productId:guidid}")]
-        public async Task<IActionResult> GetProductAsync([FromRoute]string productId) => 
+        public async Task<IActionResult> GetProductAsync([FromRoute]string productId) =>
             Json(await _productService.GetProductAsync(productId));
 
         [HttpGet("reviews/{productId:guidid}")]
-        public async Task<IActionResult> GetProductReviewsAsync([FromRoute]string productId) => 
+        public async Task<IActionResult> GetProductReviewsAsync([FromRoute]string productId) =>
             Json((await _productService.GetProductReviewsAsync(productId)).ToList());
 
-        [HttpGet("company/{productId:guidid}")]
-        public async Task<IActionResult> GetProductCompanyAsync([FromRoute]string productId) => 
+        [HttpGet("company/{productId:guidid}")] //passed with null. the product view model should be changed not set the user id but only to get it.
+        public async Task<IActionResult> GetProductCompanyAsync([FromRoute]string productId) =>
             Json(await _productService.GetProductCompanyAsync(productId));
 
-        [HttpGet("categories/{productId:guidid}")]
-        public async Task<IActionResult> GetProductCategoriesAsync([FromRoute]string productId) => 
+        [HttpGet("categories/{productId:guidid}")] 
+        public async Task<IActionResult> GetProductCategoriesAsync([FromRoute]string productId) =>
             Json((await _productService.GetProductCategoriesAsync(productId)).ToList());
 
-        [HttpPost("new")]
+        [HttpPost("new")] //passed
         public async Task<IActionResult> AddProductAsync([FromBody]ProductViewModel productViewModel)
         {
             var (success, productId) = await _productService.AddProductAsync(productViewModel);
@@ -46,6 +46,13 @@ namespace TripAdvisorForEducation.Web.Controllers
         public async Task<IActionResult> DeleteProductAsync(string productId)
         {
             var success = await _productService.DeleteProductAsync(productId);
+            return success ? Ok() : (IActionResult)BadRequest();
+        }
+
+        [HttpPut("{productId:guidid}")] //passed
+        public async Task<IActionResult> UpdateProductAsync([FromBody]ProductViewModel productViewModel, string productId)
+        {
+            var success = await _productService.UpdateProductAsync(productViewModel, productId);
             return success ? Ok() : (IActionResult)BadRequest();
         }
     }

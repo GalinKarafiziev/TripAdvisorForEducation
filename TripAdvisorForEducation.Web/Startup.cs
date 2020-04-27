@@ -62,6 +62,7 @@ namespace TripAdvisorForEducation.Web
             services.RegisterServices();
             services.AddAutoMapper(typeof(Startup));
             services.AddSpaStaticFiles(configuration => configuration.RootPath = "ClientApp/build");
+            services.AddRouting();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -99,6 +100,7 @@ namespace TripAdvisorForEducation.Web
                 endpoints.MapControllers();
                 endpoints.MapRazorPages();
             });
+
 
             app.UseSpa(spa =>
             {

@@ -9,5 +9,7 @@ namespace TripAdvisorForEducation.Services
         Task<IEnumerable<Category>> GetCategoriesAsync();
 
         Task<IEnumerable<Product>> GetCategoryProductsAsync(string categoryId);
+
+        Task<(bool success, string categoryId)> AddCategoryAsync(string categoryName);
     }
 }
