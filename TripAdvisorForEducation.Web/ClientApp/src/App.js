@@ -3,6 +3,10 @@ import { Route } from 'react-router';
 import AuthorizeRoute from './components/api-authorization/AuthorizeRoute';
 import ApiAuthorizationRoutes from './components/api-authorization/ApiAuthorizationRoutes';
 import { ApplicationPaths } from './components/api-authorization/ApiAuthorizationConstants';
+import  Layout  from './components/Layout/Layout'
+
+//Pages 
+import  ForCompanies  from './pages/For_Companies/For_companies'
 
 import './custom.css';
 
@@ -11,13 +15,10 @@ export default class App extends Component {
 
   render() {
     return (
-      <div>
-        <Route
-          path={ApplicationPaths.ApiAuthorizationPrefix}
-          component={ApiAuthorizationRoutes}
-        />
-        <h1>Hello wolrddds</h1>
-      </div>
+        <Layout>
+          <Route path="/for-companies" component={ForCompanies}/>
+          <Route path={ApplicationPaths.ApiAuthorizationPrefix} component={ApiAuthorizationRoutes} />
+        </Layout>
     );
   }
 }
