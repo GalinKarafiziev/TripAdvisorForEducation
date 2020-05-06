@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import React, { Component } from "react";
+=======
+import React from "react";
+>>>>>>> react
 import { Container, Button, Row, Col } from "reactstrap";
 
 import { ReactComponent as QuestionImg } from "../../assets/undraw_questions_75e01.svg";
@@ -10,6 +14,7 @@ import "./for_companies.style.css";
 
 function ForCompanies(props) {
   return (
+<<<<<<< HEAD
     <div>
       <FirstSection />
       <SecondSection />
@@ -48,6 +53,21 @@ function SecondSection() {
     <Container className="second-section-outer">
       <Row md="2">
         <Col className="second-section-inner">
+=======
+    <Container>
+      <div className="first_container">
+        <div className="first_content">
+          <h1>Make the right decision for your Startup company</h1>
+          <Button color="danger">Request demo</Button>
+        </div>
+        <div className="first_img">
+          <QuestionImg />
+        </div>
+      </div>
+
+      <div className="second_container">
+        <div className="sec_content">
+>>>>>>> react
           <h1>Why help Startups?</h1>
           <h2>Connect with the right customers</h2>
           <p>
@@ -56,6 +76,7 @@ function SecondSection() {
             time or try to solve a problem that does not exist which leads to
             product failure.
           </p>
+<<<<<<< HEAD
         </Col>
         <Col className="second-section-img">
           <ConnectedImg />
@@ -95,7 +116,36 @@ function ThirdSection() {
             </Container>
           </Col>
         </Row>
+=======
+        </div>
+        <div className="sec_img">
+          <ConnectedImg />
+        </div>
+      </div>
+
+      <Container className="">
+        <Container className="">
+          <TrackImg />
+          <h2>Show early tracktion</h2>
+          <p>
+            Build confidence around your product and stay as close as possible
+            with your current clients and users.
+          </p>
+        </Container>
+        <Container className="">
+          <WorldImg />
+          <h2>Scaling at the local level</h2>
+          <p>
+            Have a chance your product to be used in experiments within local
+            universities{" "}
+          </p>
+        </Container>
+>>>>>>> react
       </Container>
     </Container>
   );
 }
+<<<<<<< HEAD
+=======
+export default ForCompanies;
+>>>>>>> react
