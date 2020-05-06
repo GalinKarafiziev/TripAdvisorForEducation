@@ -4,8 +4,8 @@ using TripAdvisorForEducation.Data.ViewModels;
 
 namespace TripAdvisorForEducation.Web.Infrastructure
 {
-    public class ProductProfile : Profile
+    public class PendingCompanyProfile : Profile
     {
-        public ProductProfile() => CreateMap<Product, ProductViewModel>().ReverseMap();
+        public PendingCompanyProfile() => CreateMap<PendingCompany, PendingCompanyViewModel>().ReverseMap();
     }
 }

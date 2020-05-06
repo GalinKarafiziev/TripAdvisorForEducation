@@ -29,5 +29,9 @@ namespace TripAdvisorForEducation.Data.Models
 
         [MaxLength(60)]
         public string Country { get; set; }
+
+        public string Token { get; set; }
+
+        public bool IsTokenActive { get; set; }
     }
 }

@@ -49,10 +49,10 @@ namespace TripAdvisorForEducation.Data
 
         private async static Task SeedCompanyUsersAsync(TripAdvisorForEducationDbContext context)
         {
-            if (await context.CompanyUser.AnyAsync())
+            if (await context.CompanyUsers.AnyAsync())
                 return;
 
-            await context.CompanyUser.AddRangeAsync(
+            await context.CompanyUsers.AddRangeAsync(
                 new CompanyUser
                 {
                     UserName = "Drieam",
@@ -95,10 +95,10 @@ namespace TripAdvisorForEducation.Data
 
         private async static Task SeedCategoriesAsync(TripAdvisorForEducationDbContext context)
         {
-            if (await context.Category.AnyAsync())
+            if (await context.Categories.AnyAsync())
                 return;
 
-            await context.Category.AddRangeAsync(
+            await context.Categories.AddRangeAsync(
                 new Category { CategoryName = "Assistance" },
                 new Category { CategoryName = "Feedback tools" },
                 new Category { CategoryName = "Communication" },
@@ -118,10 +118,10 @@ namespace TripAdvisorForEducation.Data
 
         private async static Task SeedProductsAsync(TripAdvisorForEducationDbContext context)
         {
-            if (await context.Product.AnyAsync())
+            if (await context.Products.AnyAsync())
                 return;
 
-            await context.Product.AddRangeAsync(
+            await context.Products.AddRangeAsync(
                 new Product
                 {
                     UserId = "904860e9-ee59-41d5-8efb-4d480d11e526",

@@ -15,6 +15,7 @@ namespace TripAdvisorForEducation.Services
             services.AddScoped<ICompanyUserService, CompanyUserService>();
             services.AddScoped<IPendingCompanyService, PendingCompanyService>();
             services.AddScoped<IEmailSender, EmailSender>();
+            services.AddScoped<ITokenGeneratorService, TokenGeneratorService>();
         }
     }
 }

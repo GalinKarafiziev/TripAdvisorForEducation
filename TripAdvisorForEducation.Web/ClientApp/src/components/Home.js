@@ -20,7 +20,7 @@ export class Home extends Component {
 
     async getData() {
         const token = await authService.getAccessToken();
-        var response = await fetch('admin', {
+        var response = await fetch('admin/pending', {
             headers: !token ? {} : { 'Authorization': `Bearer ${token}` }
         });
 

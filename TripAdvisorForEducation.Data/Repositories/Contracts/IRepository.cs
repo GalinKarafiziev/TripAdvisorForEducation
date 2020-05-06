@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace TripAdvisorForEducation.Data.Repositories.Contracts
@@ -9,6 +11,8 @@ namespace TripAdvisorForEducation.Data.Repositories.Contracts
         Task<IEnumerable<T>> AllAsync();
 
         Task<T> GetByIdAsync(string id);
+
+        Task<T> FirstOrDefaultAsync(Expression<Func<T, bool>> predicate);
 
         Task AddAsync(T entity);
 

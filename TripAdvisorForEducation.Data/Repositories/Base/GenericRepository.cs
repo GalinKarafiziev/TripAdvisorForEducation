@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using TripAdvisorForEducation.Data.Repositories.Contracts;
 
@@ -21,6 +22,9 @@ namespace TripAdvisorForEducation.Data.Repositories.Base
         public async virtual Task<IEnumerable<T>> AllAsync() => await DbSet.ToListAsync();
 
         public async virtual Task<T> GetByIdAsync(string id) => await DbSet.FindAsync(id);
+
+        public async virtual Task<T> FirstOrDefaultAsync(Expression<Func<T, bool>> predicate) => 
+            await DbSet.FirstOrDefaultAsync(predicate);
 
         public async virtual Task AddAsync(T entity)
         {
