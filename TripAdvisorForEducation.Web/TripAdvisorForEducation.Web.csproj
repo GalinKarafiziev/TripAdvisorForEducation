@@ -32,6 +32,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="wwwroot\css\RegisterUser.css" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\TripAdvisorForEducation.Data\TripAdvisorForEducation.Data.csproj" />
     <ProjectReference Include="..\TripAdvisorForEducation.Services\TripAdvisorForEducation.Services.csproj" />
   </ItemGroup>

@@ -1,2 +1,27 @@
-﻿body {
+﻿.title {
+    height: 100px;
+    color: aliceblue;
+    background-color: #414282;
+}
+
+    .title h1 {
+        text-align: start;
+        vertical-align: middle;
+        line-height: 90px;
+        padding-left: 5em;
+    }
+
+@media (max-width: 500px) {
+
+    .title h1 {
+        text-align: start;
+        vertical-align: middle;
+        line-height: 90px;
+        padding-left: 1em;
+    }
+
+    .img {
+        width: 350px;
+        padding-right: 5em;
+    }
 }
