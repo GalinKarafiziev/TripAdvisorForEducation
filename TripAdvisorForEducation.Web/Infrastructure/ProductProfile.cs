@@ -6,6 +6,9 @@ namespace TripAdvisorForEducation.Web.Infrastructure
 {
     public class ProductProfile : Profile
     {
-        public ProductProfile() => CreateMap<Product, ProductViewModel>().ReverseMap();
+        public ProductProfile()
+        {
+            CreateMap<Product, ProductViewModel>().ReverseMap().ForAllMembers((opts => opts.Condition((src, dest, srcMember) => srcMember != null)));
+        }
     }
 }

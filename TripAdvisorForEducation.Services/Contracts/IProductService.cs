@@ -20,5 +20,7 @@ namespace TripAdvisorForEducation.Services
         Task<(bool success, string productId)> AddProductAsync(ProductViewModel productViewModel);
 
         Task<bool> DeleteProductAsync(string productId);
+
+        Task<bool> UpdateProductAsync(ProductViewModel productViewModel, string productId);
     }
 }

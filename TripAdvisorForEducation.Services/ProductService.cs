@@ -92,5 +92,20 @@ namespace TripAdvisorForEducation.Services
                 return false;
             }
         }
+
+        public async Task<bool> UpdateProductAsync(ProductViewModel productViewModel, string productId)
+        {
+            try
+            {
+                var product = await _productRepository.GetByIdAsync(productId);
+                _mapper.Map(productViewModel, product);
+                await _productRepository.SaveChangesAsync();
+                return true;
+            }
+            catch(Exception ex)
+            {
+                return false;
+            }
+        }
     }
 }
