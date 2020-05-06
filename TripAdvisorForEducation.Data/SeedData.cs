@@ -43,8 +43,15 @@ namespace TripAdvisorForEducation.Data
                 AccessFailedCount = 0,
             }, "TestAdminUser123$");
 
-            var user = await userManager.FindByEmailAsync("admin@gmail.com");
-            await userManager.AddToRoleAsync(user, UserRoles.Admin.ToString());
+            try
+            {
+                var user = await userManager.FindByEmailAsync("admin@gmail.com");
+                await userManager.AddToRoleAsync(user, UserRoles.Admin.ToString());
+            }
+            catch (Exception ex)
+            {
+
+            }
         }
 
         private async static Task SeedCompanyUsersAsync(TripAdvisorForEducationDbContext context)

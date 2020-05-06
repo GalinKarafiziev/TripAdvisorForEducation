@@ -70,7 +70,7 @@ namespace TripAdvisorForEducation.Web.Areas.Identity.Pages.Account
 
         public async Task<IActionResult> OnGetAsync(string returnUrl = null, string token = null)
         {
-            if (await _pendingCompanyService.IsTokenValid(token))
+            if (!await _pendingCompanyService.IsTokenValid(token))
                 return RedirectToPage("Login");
 
             ReturnUrl = returnUrl;
