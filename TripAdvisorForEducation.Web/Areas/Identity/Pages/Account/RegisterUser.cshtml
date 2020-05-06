@@ -9,65 +9,67 @@
     <h1><strong>Join</strong></h1>
 </div>
 
-<div class="row mx-md-n5">
-    <div class="col px-md-5">
-        <form asp-route-returnUrl="@Model.ReturnUrl" asp-route-token="@Model.Token" method="post">
-            <div class="form-group col">
+<div class="container">
+    <div class="row mx-md-n5">
+        <div class="col ">
+            <form asp-route-returnUrl="" asp-route-token="" method="post">
+                <div class="form-group col">
 
-                <h4 class="pb-3">Create a free account</h4>
+                    <h4 class="pb-3">Create a free account</h4>
 
-                <div class="form-group ">
-                    <input asp-for="Input.FirstName" class="form-control" placeholder="First name" />
-                    <span asp-validation-for="Input.FirstName" class="text-danger"></span>
+                    <div class="form-group ">
+                        <input asp-for="Input.FirstName" class="form-control" placeholder="First name" />
+                        <span asp-validation-for="Input.FirstName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input asp-for="Input.LastName" class="form-control" placeholder="Last Name" />
+                        <span asp-validation-for="Input.LastName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input asp-for="Input.Position" class="form-control" placeholder="Your position (e.g. Student, Teacher)" />
+                        <span asp-validation-for="Input.Position" class="text-danger"></span>
+                    </div>
+
+
+                    <h4 class="pb-3">Sing-in information</h4>
+                    <div asp-validation-summary="All" class="text-danger"></div>
+                    <div class="form-group">
+                        <input asp-for="Input.Email" class="form-control" placeholder="Email" />
+                        <span asp-validation-for="Input.Email" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input asp-for="Input.Password" class="form-control" placeholder="Password" />
+                        <span asp-validation-for="Input.Password" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input asp-for="Input.ConfirmPassword" class="form-control" placeholder="Confirm Password" />
+                        <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input">
+                        <label class="form-check-label" for="exampleCheck1">I agree with EdTech’s Terms and Conditions</label>
+                    </div>
+                    <button type="submit" class="btn btn-primary mt-3">Register</button>
                 </div>
-                <div class="form-group">
-                    <input asp-for="Input.LastName" class="form-control" placeholder="Last Name" />
-                    <span asp-validation-for="Input.LastName" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <input asp-for="Input.Position" class="form-control" placeholder="Your position (e.g. Student, Teacher)" />
-                    <span asp-validation-for="Input.Position" class="text-danger"></span>
-                </div>
+            </form>
 
 
-                <h4 class="pb-3">Sing-in information</h4>
-                <div asp-validation-summary="All" class="text-danger"></div>
-                <div class="form-group">
-                    <input asp-for="Input.Email" class="form-control" placeholder="Email" />
-                    <span asp-validation-for="Input.Email" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <input asp-for="Input.Password" class="form-control" placeholder="Password" />
-                    <span asp-validation-for="Input.Password" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <input asp-for="Input.ConfirmPassword" class="form-control" placeholder="Confirm Password" />
-                    <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+        </div>
+        <div class="col px-md-5">
+            <div class="mr-5">
+                <div class="mb-5">
+                    <h3>List your products</h3>
+                    <p>
+                        Are you a start-up company providing educational products? By adding your product to our platform we will help you
+                        bridges the gap between you and customers and give you valuabe insight for your product.
+                    </p>
+                    <button type="button" class="btn btn-danger">Learn more</button>
                 </div>
 
-                <div class="form-check">
-                    <input type="checkbox" class="form-check-input">
-                    <label class="form-check-label" for="exampleCheck1">I agree with EdTech’s Terms and Conditions</label>
+                <div class="container">
+                    <img class="img" src="~/undraw_welcome_3gvl.svg">
                 </div>
-                <button type="submit" class="btn btn-primary mt-3">Register</button>
-            </div>
-        </form>
-
-
-    </div>
-    <div class="col px-md-5">
-        <div class="mr-5">
-            <div class="mb-5">
-                <h3>List your products</h3>
-                <p>
-                    Are you a start-up company providing educational products? By adding your product to our platform we will help you
-                    bridges the gap between you and customers and give you valuabe insight for your product.
-                </p>
-                <button type="button" class="btn btn-danger">Learn more</button>
-            </div>
-
-            <div class="container">
-                <img class="img" src="~/undraw_welcome_3gvl.svg">
             </div>
         </div>
     </div>

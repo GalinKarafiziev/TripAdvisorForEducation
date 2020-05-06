@@ -20,6 +20,10 @@ namespace TripAdvisorForEducation.Web.Areas.Identity.Pages.Account
     public class RegisterUser : PageModel
     {
 
+
+        [BindProperty]
+        public InputModel Input { get; set; }
+
         public class InputModel
         {
             [Required]
