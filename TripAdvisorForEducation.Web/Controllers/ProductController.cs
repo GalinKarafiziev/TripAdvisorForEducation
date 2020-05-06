@@ -27,7 +27,7 @@ namespace TripAdvisorForEducation.Web.Controllers
         public async Task<IActionResult> GetProductReviewsAsync([FromRoute]string productId) =>
             Json((await _productService.GetProductReviewsAsync(productId)).ToList());
 
-        [HttpGet("company/{productId:guidid}")] //passed with null. the product view model should be changed not set the user id but only to get it. or auth->getLoggeduser ?
+        [HttpGet("company/{productId:guidid}")] //TODO passed with null. the product view model should be changed not set the user id but only to get it. or auth->getLoggeduser ?
         public async Task<IActionResult> GetProductCompanyAsync([FromRoute]string productId) =>
             Json(await _productService.GetProductCompanyAsync(productId));
 
@@ -35,7 +35,7 @@ namespace TripAdvisorForEducation.Web.Controllers
         public async Task<IActionResult> GetProductCategoriesAsync([FromRoute]string productId) =>
             Json((await _productService.GetProductCategoriesAsync(productId)).ToList());
 
-        [HttpPost("new")] //passed
+        [HttpPost("new")] 
         public async Task<IActionResult> AddProductAsync([FromBody]ProductViewModel productViewModel)
         {
             var (success, productId) = await _productService.AddProductAsync(productViewModel);

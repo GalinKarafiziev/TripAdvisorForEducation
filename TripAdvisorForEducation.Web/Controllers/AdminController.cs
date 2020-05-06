@@ -1,9 +1,7 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 using System.Threading.Tasks;
-using TripAdvisorForEducation.Data.ViewModels;
 using TripAdvisorForEducation.Services;
 using TripAdvisorForEducation.Services.Contracts;
 using TripAdvisorForEducation.Services.Messaging;

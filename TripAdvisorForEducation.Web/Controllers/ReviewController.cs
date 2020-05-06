@@ -26,7 +26,7 @@ namespace TripAdvisorForEducation.Web.Controllers
             return success ? Ok(new { reviewID = reviewId }) : (IActionResult)BadRequest();
         }
 
-        [HttpPut("{reviewId}")]
+        [HttpPut("{reviewId:guidid}")]
         public async Task<IActionResult> UpdateReview([FromBody] ReviewViewModel reviewViewModel, string reviewId)
         {
             var (success, reviewIds) = await _reviewService.UpdateReviewAsync(reviewId, reviewViewModel);
@@ -34,25 +34,17 @@ namespace TripAdvisorForEducation.Web.Controllers
         }
 
         [HttpGet("{reviewId}/user")]
-        public async Task<IActionResult> GetAcademicsReview(string reviewId)
-        {
-            return Json(await _reviewService.GetAcademicsUserReviewAsync(reviewId));
+        public async Task<IActionResult> GetAcademicsReview(string reviewId) =>
+            Json(await _reviewService.GetAcademicsUserReviewAsync(reviewId));
 
-        }
-
-        [HttpDelete("{reviewId}")]
+        [HttpDelete("{reviewId:guidid}")]
         public async Task<IActionResult> DeleteReview(string reviewId)
         {
             var success = await _reviewService.DeleteReviewAsync(reviewId);
             return success ? Ok(success) : (IActionResult)BadRequest();
         }
 
-        [HttpGet("{reviewId}")]
-        public async Task<IActionResult> GetReview(string reviewId)
-        {
-            return Json(await _reviewService.GetReview(reviewId));
-        }
-
-
+        [HttpGet("{reviewId:guidid}")]
+        public async Task<IActionResult> GetReview(string reviewId) => Json(await _reviewService.GetReview(reviewId));
     }
 }

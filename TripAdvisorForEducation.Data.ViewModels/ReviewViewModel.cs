@@ -7,7 +7,6 @@ namespace TripAdvisorForEducation.Data.ViewModels
 {
     public class ReviewViewModel
     {
-        
         public int Rating { get; set; }
         
         public string Body { get; set; }

@@ -12,8 +12,8 @@ namespace TripAdvisorForEducation.Web.Infrastructure
     {
         public ReviewProfile()
         {
-
-            CreateMap<Review, ReviewViewModel>().ReverseMap().ForAllMembers((opts => opts.Condition((src, dest, srcMember) => srcMember != null))); ;
+            CreateMap<Review, ReviewViewModel>().ReverseMap().ForAllMembers((opts => 
+                opts.Condition((src, dest, srcMember) => srcMember != null))); ;
         }
     }
 }

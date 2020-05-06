@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using CuttingEdge.Conditions;
 using System;
-using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
 using TripAdvisorForEducation.Data.Models;
 using TripAdvisorForEducation.Data.Repositories.Contracts;
@@ -82,7 +81,5 @@ namespace TripAdvisorForEducation.Services
         {
            return await _reviewRepository.GetReviewUserAsync(reviewId);
         }
-
-        
     }
 }

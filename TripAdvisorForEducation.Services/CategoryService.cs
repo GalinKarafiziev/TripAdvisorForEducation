@@ -25,13 +25,11 @@ namespace TripAdvisorForEducation.Services
                     await _categoryRepository.AddAsync(category);
                     await _categoryRepository.SaveChangesAsync();
                     return (true, category.CategoryId);
-                
             }
             catch(Exception ex)
             {
                 return (false, null);
             }
-            
         }
 
         public async Task<IEnumerable<Category>> GetCategoriesAsync() => 

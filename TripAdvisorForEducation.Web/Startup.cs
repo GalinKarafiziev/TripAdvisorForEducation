@@ -107,7 +107,6 @@ namespace TripAdvisorForEducation.Web
                 endpoints.MapRazorPages();
             });
 
-
             app.UseSpa(spa =>
             {
                 spa.Options.SourcePath = "ClientApp";
