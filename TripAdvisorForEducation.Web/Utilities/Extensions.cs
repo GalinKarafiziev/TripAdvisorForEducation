@@ -13,8 +13,8 @@ namespace TripAdvisorForEducation.Web.Utilities
             using var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope();
             using var context = serviceScope.ServiceProvider.GetService<TripAdvisorForEducationDbContext>();
 
-            //await context.Database.EnsureCreatedAsync();
-            //await context.Database.MigrateAsync();
+            await context.Database.EnsureCreatedAsync();
+            await context.Database.MigrateAsync();
             await SeedData.InitializeAsync(serviceScope.ServiceProvider);
         }
     }
