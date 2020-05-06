@@ -6,43 +6,45 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <title>@ViewData["Title"] - TripAdvisorForEducation.Web</title>
     <link rel="stylesheet" href="~/Identity/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/Identity/css/site.css" />
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-light navbar-toggleable-sm bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" href="~/">TripAdvisorForEducation.Web</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    @{
-                        var result = Engine.FindView(ViewContext, "_LoginPartial", isMainPage: false);
-                    }
-                    @if (result.Success)
-                    {
-                        await Html.RenderPartialAsync("_LoginPartial");
-                    }
-                    else
-                    {
-                        throw new InvalidOperationException("The default Identity UI layout requires a partial view '_LoginPartial' " +
-                            "usually located at '/Pages/_LoginPartial' or at '/Views/Shared/_LoginPartial' to work. Based on your configuration " +
-                            $"we have looked at it in the following locations: {System.Environment.NewLine}{string.Join(System.Environment.NewLine, result.SearchedLocations)}.");
-                    }
-                </div>
-            </div>
+        <nav class="navbar navbar-dark" style="background-color: #414282;">
+     
+            <a class="navbar-brand ml-5" href="~/"><strong>EdTech</strong></a>
+            @*<span class="navbar-brand ml-5 h1" href="~/"><strong>EdTech</strong></span>*@
+
+            @{
+                var result = Engine.FindView(ViewContext, "_LoginPartial", isMainPage: false);
+            }
+            @if (result.Success)
+            {
+                await Html.RenderPartialAsync("_LoginPartial");
+            }
+            else
+            {
+                throw new InvalidOperationException("The default Identity UI layout requires a partial view '_LoginPartial' " +
+                    "usually located at '/Pages/_LoginPartial' or at '/Views/Shared/_LoginPartial' to work. Based on your configuration " +
+                    $"we have looked at it in the following locations: {System.Environment.NewLine}{string.Join(System.Environment.NewLine, result.SearchedLocations)}.");
+            }
+
         </nav>
+
+        <nav class="navbar navbar-light" style="background-color: #414282;">
+            <!-- Navbar content -->
+        </nav>
+
     </header>
 
-    @RenderBody()
     <main role="main">
-
+        @RenderBody()
     </main>
+
+
     <footer class="footer border-top text-muted">
         <div class="container">
             &copy; 2020 - TripAdvisorForEducation.Web - <a asp-area="" asp-page="Privacy">Privacy</a>

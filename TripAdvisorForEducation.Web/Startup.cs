@@ -45,6 +45,8 @@ namespace TripAdvisorForEducation.Web
 
             services.AddAuthorization();
 
+            
+
             var emailConfig = Configuration
                 .GetSection("EmailConfiguration")
                 .Get<EmailConfiguration>();
