@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 .first-section-outer{
   background-color: #e8e7ff;
   
@@ -57,22 +56,3 @@
 .third-section-inner-right h2{
   margin-top: 1.5em;
 }
-=======
-.first_container {
-  display: grid;
-  grid-template-columns: auto auto;
-  grid-column-gap: 5em;
-  padding-top: 5em;
-}
-.first_content h1 {
-  margin-bottom: 1em;
-}
-
-.first_content {
-  padding-top: 7em;
-}
-
-.second_container{
-    grid-template-columns: 1fr 1fr;
-}
->>>>>>> react
