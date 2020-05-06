@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import { Container, Button, Row, Col } from "reactstrap";
 
 import { ReactComponent as QuestionImg } from "../../assets/undraw_questions_75e01.svg";
@@ -10,19 +10,44 @@ import "./for_companies.style.css";
 
 function ForCompanies(props) {
   return (
-    <Container>
-      <div className="first_container">
-        <div className="first_content">
-          <h1>Make the right decision for your Startup company</h1>
-          <Button color="danger">Request demo</Button>
-        </div>
-        <div className="first_img">
-          <QuestionImg />
-        </div>
-      </div>
+    <div>
+      <FirstSection />
+      <SecondSection />
+      <ThirdSection />
+    </div>
 
-      <div className="second_container">
-        <div className="sec_content">
+  );
+}
+export default ForCompanies;
+
+function FirstSection() {
+  return (
+    // <div className="first-section">
+    <Container className="first-section-outer" fluid={true}>
+      <Container className="first-section-inner">
+        <Row md="2">
+          <Col>
+            <div className="header-text">
+              <h1>Make the right decision for your Startup company</h1>
+              <Button className="btn-request" color="danger">
+                Request demo
+              </Button>
+            </div>
+          </Col>
+          <Col className="first-section-img">
+            <QuestionImg />
+          </Col>
+        </Row>
+      </Container>
+    </Container>
+  );
+}
+
+function SecondSection() {
+  return (
+    <Container className="second-section-outer">
+      <Row md="2">
+        <Col className="second-section-inner">
           <h1>Why help Startups?</h1>
           <h2>Connect with the right customers</h2>
           <p>
@@ -31,31 +56,46 @@ function ForCompanies(props) {
             time or try to solve a problem that does not exist which leads to
             product failure.
           </p>
-        </div>
-        <div className="sec_img">
+        </Col>
+        <Col className="second-section-img">
           <ConnectedImg />
-        </div>
-      </div>
+        </Col>
+      </Row>
+    </Container>
+  );
+}
 
-      <Container className="">
-        <Container className="">
-          <TrackImg />
-          <h2>Show early tracktion</h2>
-          <p>
-            Build confidence around your product and stay as close as possible
-            with your current clients and users.
-          </p>
-        </Container>
-        <Container className="">
-          <WorldImg />
-          <h2>Scaling at the local level</h2>
-          <p>
-            Have a chance your product to be used in experiments within local
-            universities{" "}
-          </p>
-        </Container>
+function ThirdSection() {
+  return (
+    <Container className="third-section-outer" fluid={true}>
+      <Container className="third-section-inner">
+        <Row md="2">
+          <Col>
+            <Container 
+            className="third-section-inner-left">
+              <TrackImg 
+              className="third-section-inner-left-img" />
+              <h2>Show early tracktion</h2>
+              <p>
+                Build confidence around your product and stay as close as
+                possible with your current clients and users.
+              </p>
+            </Container>
+          </Col>
+
+          <Col>
+            <Container 
+            className="third-section-inner-right">
+              <WorldImg />
+              <h2>Scaling at the local level</h2>
+              <p>
+                Have a chance your product to be used in experiments within
+                local universities
+              </p>
+            </Container>
+          </Col>
+        </Row>
       </Container>
     </Container>
   );
 }
-export default ForCompanies;
