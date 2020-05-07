@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route } from 'react-router';
+import { Route , Switch} from 'react-router';
 import AuthorizeRoute from './components/api-authorization/AuthorizeRoute';
 import ApiAuthorizationRoutes from './components/api-authorization/ApiAuthorizationRoutes';
 import { ApplicationPaths } from './components/api-authorization/ApiAuthorizationConstants';
@@ -17,12 +17,14 @@ export default class App extends Component {
   render() {
     return (
       <Layout>
-        <Route path='/for-companies' component={ForCompanies} />
-        <Route
-          path={ApplicationPaths.ApiAuthorizationPrefix}
-          component={ApiAuthorizationRoutes}
-        />
-        <Route path='/' component={Home} />
+        <Switch>
+          <Route path='/for-companies' component={ForCompanies} />
+          <Route
+            path={ApplicationPaths.ApiAuthorizationPrefix}
+            component={ApiAuthorizationRoutes}
+          />
+          <Route path='/' component={Home} />
+        </Switch>
       </Layout>
     );
   }
