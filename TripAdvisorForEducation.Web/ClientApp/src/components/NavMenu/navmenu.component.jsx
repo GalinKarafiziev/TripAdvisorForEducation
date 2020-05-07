@@ -1,36 +1,59 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-
+import { Collapse, Container, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink } from 'reactstrap';
 import { ReactComponent as Logo } from "../../assets/EdTech.svg";
-
+import { LoginMenu } from '../api-authorization/LoginMenu';
 import "./navmenu.style.css";
 
 
 
-export default class NavMenu extends Component {
-    render() {
-        return (
-            <div className="header">
-            <Link className="logo-container" to="/">
-              <Logo className="logo" />
-            </Link>
-        
-            <div className="options">
-              <Link className="logo-container" to="/">
-                <Logo className="logo" />
-              </Link>
-              <Link className="logo-container" to="/">
-                <Logo className="logo" />
-              </Link>
-              <Link className="logo-container" to="/">
-                <Logo className="logo" />
-              </Link>
-              <Link className="logo-container" to="/">
-                <Logo className="logo" />
-              </Link>
-            </div>
-          </div>
-        )
-    }
+export class NavMenu extends Component {
+  static displayName = NavMenu.name;
+
+  constructor (props) {
+    super(props);
+
+    this.toggleNavbar = this.toggleNavbar.bind(this);
+    this.state = {
+      collapsed: true
+    };
+  }
+
+  toggleNavbar () {
+    this.setState({
+      collapsed: !this.state.collapsed
+    });
+  }
+
+  render () {
+    return (
+      <header>
+        <Navbar className="navbar-expand-sm navbar-toggleable-sm ng-white border-bottom box-shadow mb-3" light>
+          <Container>
+            <NavbarBrand tag={Link} to="/">TripAdvisorForEducation.Web</NavbarBrand>
+            <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
+            <Collapse className="d-sm-inline-flex flex-sm-row-reverse" isOpen={!this.state.collapsed} navbar>
+              <ul className="navbar-nav flex-grow">
+                <NavItem>
+                  <NavLink tag={Link} className="text-dark" to="/">Home</NavLink>
+                </NavItem>
+                <NavItem>
+                  <NavLink tag={Link} className="text-dark" to="/counter">Counter</NavLink>
+                </NavItem>
+                <NavItem>
+                  <NavLink tag={Link} className="text-dark" to="/fetch-data">Fetch data</NavLink>
+                </NavItem>
+                <LoginMenu>
+                </LoginMenu>
+              </ul>
+            </Collapse>
+          </Container>
+        </Navbar>
+      </header>
+    );
+  }
 }
+
+export default NavMenu;
+
 
