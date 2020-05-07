@@ -1,0 +1,40 @@
+.home-header {
+  text-align: center;
+  padding-top: 10%;
+  z-index: 1;
+}
+.gradImage {
+  width: 340px;
+  height: 388px;
+  background-image: url('./assets/undraw_Graduation_ktn0.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+  padding: 0;
+  margin: 0;
+  position: absolute;
+}
+.cardTitle {
+  padding-top: 20px;
+  font-weight: bold;
+}
+.cardSubtitle {
+  padding-top: 30px;
+  max-width: 300px;
+}
+.sellingPointContainer {
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+.searchContainer {
+  background-color: #e8e7ff;
+  padding-bottom: 50px;
+  z-index: -1;
+}
+.categoty-list {
+  list-style-type: none;
+}
+.popular-categories-container {
+  background-color: #f4fcf4;
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
