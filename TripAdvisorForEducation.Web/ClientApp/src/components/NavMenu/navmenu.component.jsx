@@ -1,9 +1,10 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import { Link } from "react-router-dom";
-import { Collapse, Container, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink } from 'reactstrap';
+import { Collapse, Container, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink, DropdownMenu, Dropdown, DropdownToggle, DropdownItem } from 'reactstrap';
 import { ReactComponent as Logo } from "../../assets/EdTech.svg";
 import { LoginMenu } from '../api-authorization/LoginMenu';
 import "./navmenu.style.css";
+
 
 
 
@@ -26,22 +27,20 @@ export class NavMenu extends Component {
   }
 
   render () {
+   
     return (
       <header>
-        <Navbar className="navbar-expand-sm navbar-toggleable-sm ng-white border-bottom box-shadow mb-3" light>
+        <Navbar className="navbar-expand-sm navbar-toggleable-sm light  " light style={{backgroundColor: '#414282',fontSize: 20 }} >
           <Container>
-            <NavbarBrand tag={Link} to="/">TripAdvisorForEducation.Web</NavbarBrand>
+            <NavbarBrand tag={Link} style={{fontSize: 40 , color: 'white'}} to="/">EdTech</NavbarBrand>
             <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
             <Collapse className="d-sm-inline-flex flex-sm-row-reverse" isOpen={!this.state.collapsed} navbar>
               <ul className="navbar-nav flex-grow">
                 <NavItem>
-                  <NavLink tag={Link} className="text-dark" to="/">Home</NavLink>
+                  <DropDownCategories />
                 </NavItem>
                 <NavItem>
-                  <NavLink tag={Link} className="text-dark" to="/counter">Counter</NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink tag={Link} className="text-dark" to="/fetch-data">Fetch data</NavLink>
+                  <NavLink tag={Link}  style={{color: 'white'}} to="/for-companies">For Companies</NavLink>
                 </NavItem>
                 <LoginMenu>
                 </LoginMenu>
@@ -56,4 +55,31 @@ export class NavMenu extends Component {
 
 export default NavMenu;
 
+
+function DropDownCategories (props){
+
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const toggle = () => setDropdownOpen(!dropdownOpen);  
+
+  return(
+
+    <Dropdown  nav group={true} isOpen={dropdownOpen} toggle={toggle}>
+      <DropdownToggle nav caret style={{color: 'white'}}>
+        Categories
+      </DropdownToggle>
+      <DropdownMenu>
+        <DropdownItem>Assistance </DropdownItem>
+        <DropdownItem>Feedback tools</DropdownItem>
+        <DropdownItem >Communication</DropdownItem>
+        <DropdownItem>Task Managment</DropdownItem>
+        <DropdownItem>Schedule</DropdownItem>
+        <DropdownItem>Presentation</DropdownItem>
+        <DropdownItem>Peer Feedback</DropdownItem>
+      </DropdownMenu>
+
+    </Dropdown>
+
+  );
+
+}
 
